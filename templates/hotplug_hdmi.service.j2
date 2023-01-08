@@ -1,0 +1,11 @@
+[Unit]
+Description=Service which runs when hotplugging HDMI; the service is called by udev /etc/udev/rules.d/95-monitor-hotplug.rules
+
+[Service]
+Type=simple
+RemainAfterExit=no
+User={{ lookup('env', 'USER') }}
+ExecStart=/usr/bin/bash /usr/local/bin/hotplug_monitor
+
+[Install]
+WantedBy=graphical.target

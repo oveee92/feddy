@@ -1,2 +1,6 @@
 ---
 # handlers file for feddy
+
+- name: Daemon_reload
+  systemd:
+    daemon_reload: true

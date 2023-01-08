@@ -5,4 +5,5 @@
     name: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm
     state: present
 
+# TODO: Config?
 ...

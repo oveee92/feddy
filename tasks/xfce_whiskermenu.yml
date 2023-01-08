@@ -1,8 +1,39 @@
 ---
 
-- name: Copy over the profiles
+- name: Ensure xfce panel folder exists
+  file:
+    state: directory
+    path: ~/.config/xfce4/panel/profiles/
+    recurse: true
+  become: false
+
+- name: Copy over the panel profiles
+  copy:
+    src: "{{ item }}"
+    dest: ~/.config/xfce4/panel/profiles/
+  loop:
+    - laptop_only.tar.bz2
+    - widescreen.tar.bz2
+  become: false
+
 - name: Copy over the script
+  copy:
+    src: hotplug_monitor.sh
+    dest: /usr/local/bin/hotplug_monitor
+    mode: '0755'
+    owner: root
+    group: root
+
 - name: Template out the service
+  template:
+    src: hotplug_hdmi.service.j2
+    dest: /etc/systemd/system/hotplug_hdmi.service
+  notify: Daemon_reload
+
 - name: Copy over the udev rule
+  copy:
+    content: |
+      ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/usr/bin/systemctl start hotplug_hdmi.service"
+    dest: /etc/udev/rules.d/95-monitor-hotplug.rules
 
 ...
