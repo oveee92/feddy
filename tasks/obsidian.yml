@@ -1,0 +1,36 @@
+---
+
+- name: Download Obsidian AppImage
+  get_url:
+    url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.1.9/Obsidian-1.1.9.AppImage
+    dest: /usr/local/bin/obsidian.AppImage
+    mode: '0755'
+
+- name: Check that the dekstop file exists
+  stat:
+    path: /usr/share/applications/obsidian.desktop
+  register: desktop_file
+
+- name: Unpack the AppImage into a squashfs-root directory
+  shell: obsidian.AppImage --appimage-extract
+  args:
+    chdir: /usr/local/bin/
+  when: not desktop_file.stat.exists
+
+- name: Extract icons from AppImage
+  copy:
+    remote_src: true
+    src: /usr/local/bin/squashfs-root/usr/share/icons/
+    dest: /usr/share/icons/
+  when: not desktop_file.stat.exists
+
+- name: Extract desktop file from AppImage
+  copy:
+    remote_src: true
+    src: /usr/local/bin/squashfs-root/obsidian.desktop
+    dest: /usr/share/applications/
+  when: not desktop_file.stat.exists
+
+# TODO: Config / settings
+...
+

@@ -1,0 +1,32 @@
+---
+
+- gather_facts:
+
+- name: Install dropbox
+  shell: curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C $HOME -xzf -
+  args:
+    creates: ~/.dropbox-dist/dropboxd # only when this file doesnt exist
+
+- name: Ensure directory for userspace systemd exists
+  file:
+    path: ~/.config/systemd/user
+    recurse: yes
+    state: directory
+  become: false
+
+- name: Template out the systemd unit file
+  template:
+    src: dropbox.service.j2
+    dest: ~/.config/systemd/user/dropbox.service
+  become: false
+
+- name: Enable the systemd unit file in userspace (dont start until next reboot though)
+  ansible.builtin.systemd:
+    name: dropbox
+    scope: user
+    enabled: true
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_id }}" # Funny business to let you start things in user scope
+  become: false
+
+...

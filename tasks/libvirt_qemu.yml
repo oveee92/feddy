@@ -1,0 +1,26 @@
+---
+
+- name: Install the virtualization group
+  dnf:
+    name: '@virtualization'
+    state: present
+
+- name: Enable libvirtd
+  service:
+    name: libvirtd
+    enabled: yes
+  register: enable_first
+
+- name: Start it if its the first time
+  service:
+    name: libvirtd
+    state: started
+  when: enable_first.changed
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    append: true
+    groups: libvirt
+
+...

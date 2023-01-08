@@ -1,0 +1,20 @@
+---
+
+- name: Add Microsoft GPG key
+  rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Add VS Code repository
+  yum_repository:
+    name: vscode
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Install VS Code
+  yum:
+    name: code
+    state: present
+
+...

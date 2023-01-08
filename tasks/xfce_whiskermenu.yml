@@ -1,0 +1,8 @@
+---
+
+- name: Copy over the profiles
+- name: Copy over the script
+- name: Template out the service
+- name: Copy over the udev rule
+
+...

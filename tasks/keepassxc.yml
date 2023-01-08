@@ -1,0 +1,73 @@
+---
+
+- name: Install keepassxc
+  dnf:
+    name: keepassxc
+    state: present
+
+- name: Configure keepassxc (General)
+  ini_file:
+    path: ~/.config/keepassxc/keepassxc.ini
+    no_extra_spaces: true
+    section: General
+    option: "{{ item.opt }}"
+    value: "{{ item.val }}"
+  loop:
+    - opt: BackupBeforeSave
+      val: 'true'
+    - opt: UseAtomicSaves
+      val: 'false'
+  become: false
+
+- name: Configure keepassxc (GUI)
+  ini_file:
+    path: ~/.config/keepassxc/keepassxc.ini
+    no_extra_spaces: true
+    section: GUI
+    option: "{{ item.opt }}"
+    value: "{{ item.val }}"
+  loop:
+    - opt: ApplicationTheme
+      val: 'dark'
+    - opt: MinimizeOnClose
+      val: 'true'
+    - opt: MinimizeOnStartup
+      val: 'true'
+    - opt: ShowTrayIcon
+      val: 'true'
+    - opt: TrayIconAppearance
+      val: 'monochrome-light'
+  become: false
+
+- name: Configure keepassxc (PasswordGenerator)
+  ini_file:
+    path: ~/.config/keepassxc/keepassxc.ini
+    no_extra_spaces: true
+    section: PasswordGenerator
+    option: "{{ item.opt }}"
+    value: "{{ item.val }}"
+  loop:
+    - opt: AdvancedMode
+      val: 'true'
+    - opt: ExcludedChars
+      val: |-
+        \"'^~`'
+    - opt: Length
+      val: 16
+    - opt: Logograms
+      val: 'true'
+  become: false
+
+- name: Configure keepassxc (Security)
+  ini_file:
+    path: ~/.config/keepassxc/keepassxc.ini
+    no_extra_spaces: true
+    section: Security
+    option: "{{ item.opt }}"
+    value: "{{ item.val }}"
+  loop:
+    - opt: LockDatabaseMinimize
+      val: 'true'
+    - opt: PasswordsRepeatVisible
+      val: 'false'
+  become: false

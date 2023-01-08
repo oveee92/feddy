@@ -1,0 +1,13 @@
+---
+
+- ansible.builtin.include_tasks: basics.yml
+- ansible.builtin.include_tasks: dropbox.yml
+- ansible.builtin.include_tasks: keepassxc.yml
+- ansible.builtin.include_tasks: libvirt_qemu.yml
+- ansible.builtin.include_tasks: vscode.yml
+- ansible.builtin.include_tasks: onlyoffice.yml
+- ansible.builtin.include_tasks: obsidian.yml
+- ansible.builtin.include_tasks: xfce_whiskermenu.yml
+- ansible.builtin.include_tasks: flameshot_qr.yml
+
+...

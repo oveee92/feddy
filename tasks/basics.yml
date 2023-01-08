@@ -1,0 +1,19 @@
+---
+
+- name: Install basic packages
+  dnf:
+    name:
+      - remmina
+      - firefox
+      - podman
+      - podman-compose
+      - flameshot
+      - clipman
+      - qalculate-gtk
+      - openvpn
+      - openconnect
+    state: present
+
+# TODO: dotfiles, etc.
+
+...
