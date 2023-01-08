@@ -1,13 +1,39 @@
 ---
 
-- ansible.builtin.include_tasks: basics.yml
-- ansible.builtin.include_tasks: dropbox.yml
-- ansible.builtin.include_tasks: keepassxc.yml
-- ansible.builtin.include_tasks: libvirt_qemu.yml
-- ansible.builtin.include_tasks: vscode.yml
-- ansible.builtin.include_tasks: onlyoffice.yml
-- ansible.builtin.include_tasks: obsidian.yml
-- ansible.builtin.include_tasks: xfce_whiskermenu.yml
-- ansible.builtin.include_tasks: flameshot_qr.yml
+- name: Install basic stuff, etc
+  include_tasks: basics.yml
+  tags: [basics]
+
+- name: Install dropbox for main user
+  include_tasks: dropbox.yml
+  tags: [dropbox]
+
+- name: Install keepassxc for main user
+  include_tasks: keepassxc.yml
+  tags: [keepassxc]
+
+- name: Install libvirt for virtualization
+  include_tasks: libvirt_qemu.yml
+  tags: [kvm]
+
+- name: Install VSCode
+  include_tasks: vscode.yml
+  tags: [vscode]
+
+- name: Install OnlyOffice
+  include_tasks: onlyoffice.yml
+  tags: [onlyoffice]
+
+- name: Install Obsidian notes
+  include_tasks: obsidian.yml
+  tags: [obsidian]
+
+- name: Install and set up the whiskermenu and xfce panels
+  include_tasks: xfce_whiskermenu.yml
+  tags: [xfce]
+
+- name: Set up flameshot to read QR codes
+  include_tasks: flameshot_qr.yml
+  tags: [qr]
 
 ...
