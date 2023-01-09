@@ -71,3 +71,14 @@
     - opt: PasswordsRepeatVisible
       val: 'false'
   become: false
+
+- name: Add shortcut for flameshot
+  xfconf:
+    channel: xfce4-keyboard-shortcuts
+    property: "/commands/custom/{{ item.hotkeys }}"
+    value_type: string
+    value: "{{ item.command }}"
+  loop:
+    - hotkeys: '<Primary><Alt>k' # Open keepass
+      command: 'keepassxc'
+  become: false

@@ -1,0 +1,19 @@
+set background=dark
+set nohlsearch
+"set number
+"set relativenumber
+syntax on
+
+" Enable autocompletion
+set wildmode=longest,list,full
+
+" For regular files, set tab to 4 spaces
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+" Keep lines below and above the cursor when scrolling
+set scrolloff=10
+
+" For yaml, set tab to 2 spaces, autoindent
+autocmd FileType yaml setlocal sw=2 ts=2 et ai

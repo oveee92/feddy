@@ -3,7 +3,7 @@
 - name: Download Obsidian AppImage
   get_url:
     url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.1.9/Obsidian-1.1.9.AppImage
-    dest: /usr/local/bin/obsidian.AppImage
+    dest: /usr/local/bin/obsidian
     mode: '0755'
 
 - name: Check that the dekstop file exists
@@ -12,7 +12,7 @@
   register: desktop_file
 
 - name: Unpack the AppImage into a squashfs-root directory
-  shell: obsidian.AppImage --appimage-extract
+  shell: obsidian --appimage-extract
   args:
     chdir: /usr/local/bin/
   when: not desktop_file.stat.exists
@@ -32,5 +32,16 @@
   when: not desktop_file.stat.exists
 
 # TODO: Config / settings
+
+- name: Add shortcut for flameshot
+  xfconf:
+    channel: xfce4-keyboard-shortcuts
+    property: "/commands/custom/{{ item.hotkeys }}"
+    value_type: string
+    value: "{{ item.command }}"
+  loop:
+    - hotkeys: '<Super>n' # Open Obsidian notes
+      command: 'obsidian'
+  become: false
 ...
 
