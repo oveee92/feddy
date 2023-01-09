@@ -12,7 +12,12 @@
       - qalculate-gtk
       - openvpn
       - openconnect
+      - sshpass
     state: present
+
+- name: Install pip modules
+  pip:
+    name: ansible
 
 # TODO: dotfiles, etc.
 

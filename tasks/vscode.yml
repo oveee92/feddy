@@ -17,6 +17,12 @@
     name: code
     state: present
 
-# TODO: Config
+- name: Make sure the keyring directory exists, to allow persistent login for vscode
+  file:
+    path: ~/.local/share/keyrings
+    state: directory
+  become: false
+
+# Config is fetched automatically from github
 
 ...
