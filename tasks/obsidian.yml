@@ -31,6 +31,14 @@
     dest: /usr/share/applications/
   when: not desktop_file.stat.exists
 
+- name: Ensure that the Exec field is correct
+  ini_file:
+    path: /usr/share/applications/obsidian.desktop
+    no_extra_spaces: true
+    section: Desktop Entry
+    option: Exec
+    value: /usr/local/bin/obsidian
+
 # TODO: Config / settings
 
 - name: Add shortcut for flameshot
