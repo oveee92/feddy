@@ -1,38 +1,75 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Install a Fedora 37 with my preferred setup
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- A clean install of Fedora 37 XFCE4 edition.
+- A regular user with sudo access
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+None I guess (yet)
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- git must be installed
+- ansible must be available (preferrably with pip)
 
-Example Playbook
-----------------
+Example installation
+--------------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Log into the fedora desktop with your user, open the terminal and paste the following:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```bash
+# Install git and ansible
+sudo dnf install git python3-pip
+python3 -m pip install ansible --user
+
+# Create the folder and the playbook
+mkdir -p git/ansible && cd git/ansible
+cat << EOF > install.yml
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - import_role:
+        name: feddy
+...
+EOF
+
+# Create the role folder and clone this role to it
+mkdir roles
+git clone git@github.com:oveee92/feddy.git roles/feddy
+
+# Run the ansible setup
+ansible-playbook install.yml -K
+```
+
+Example playbooks
+-----------------
+```yaml
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - import_tasks:
+        name: feddy
+...
+```
 
 License
 -------
 
-BSD
+Apache-2.0
+
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Me
