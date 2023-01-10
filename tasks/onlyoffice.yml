@@ -1,8 +1,13 @@
 ---
 
-- name: Install OnlyOffice
+- name: Set up OnlyOffice repo
   dnf:
-    name: https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm
+    name: https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
+    state: present
+
+- name: Install OnlyOffice desktop edition
+  dnf:
+    name: onlyoffice-desktopeditors
     state: present
 
 # TODO: Config?
