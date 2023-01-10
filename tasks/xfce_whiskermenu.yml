@@ -15,9 +15,11 @@
     - laptop_only.tar.bz2
     - widescreen.tar.bz2
   become: false
+  notify: panel_profiles_copy
 
 - name: Set the laptop panel first time
-  shell: xfce4-panel-profiles load ~/.config/xfce4/panel/profiles/laptop_only.tar.bz2 
+  shell: xfce4-panel-profiles load ~/.config/xfce4/panel/profiles/laptop_only.tar.bz2
+  when: panel_profiles_copy.changed
   become: false
 
 - name: Copy over the script

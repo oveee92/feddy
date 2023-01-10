@@ -11,25 +11,31 @@
     path: /usr/share/applications/obsidian.desktop
   register: desktop_file
 
-- name: Unpack the AppImage into a squashfs-root directory
-  shell: obsidian --appimage-extract
-  args:
-    chdir: /usr/local/bin/
-  when: not desktop_file.stat.exists
+- when: not desktop_file.stat.exists
+  block:
 
-- name: Extract icons from AppImage
-  copy:
-    remote_src: true
-    src: /usr/local/bin/squashfs-root/usr/share/icons/
-    dest: /usr/share/icons/
-  when: not desktop_file.stat.exists
+    - name: Unpack the AppImage into a squashfs-root directory
+      shell: obsidian --appimage-extract
+      args:
+        chdir: /usr/local/bin/
 
-- name: Extract desktop file from AppImage
-  copy:
-    remote_src: true
-    src: /usr/local/bin/squashfs-root/obsidian.desktop
-    dest: /usr/share/applications/
-  when: not desktop_file.stat.exists
+    - name: Extract icons from AppImage
+      copy:
+        remote_src: true
+        src: /usr/local/bin/squashfs-root/usr/share/icons/
+        dest: /usr/share/icons/
+
+    - name: Extract desktop file from AppImage
+      copy:
+        remote_src: true
+        src: /usr/local/bin/squashfs-root/obsidian.desktop
+        dest: /usr/share/applications/
+
+    - name: Remove the squashfs-root directory again
+      file:
+        path: /usr/local/bin/squashfs-root
+        recurse: true
+        state: absent
 
 - name: Ensure that the Exec field is correct
   ini_file:
@@ -41,7 +47,7 @@
 
 # TODO: Config / settings
 
-- name: Add shortcut for flameshot
+- name: Add shortcut for Obsidian
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"
