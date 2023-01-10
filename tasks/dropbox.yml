@@ -1,9 +1,11 @@
 ---
 
-- name: Install dropbox
-  shell: curl -L "https://www.dropbox.com/download?plat=lnx.x86_64" | tar -C $HOME -xzf -
-  args:
-    creates: ~/.dropbox-dist/dropboxd # only when this file doesn't exist
+- name: Fetch and unarchive the dropbox installer
+  unarchive:
+    src: https://www.dropbox.com/download?plat=lnx.x86_64
+    dest: ~/
+    creates: ~/.dropbox-dist/dropboxd # Only when this file doesn't exist
+  become: false
 
 - name: Ensure directory for userspace systemd exists
   file:

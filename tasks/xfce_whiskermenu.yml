@@ -36,4 +36,6 @@
       ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/usr/bin/systemctl start hotplug_hdmi.service"
     dest: /etc/udev/rules.d/95-monitor-hotplug.rules
 
+# TODO: Set the win key to pop up whiskermenu 
+# Might need this: https://forum.manjaro.org/t/popping-up-whisker-menu-with-super-key/117865/4 (Alt-F1)
 ...
