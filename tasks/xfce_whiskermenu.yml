@@ -16,6 +16,10 @@
     - widescreen.tar.bz2
   become: false
 
+- name: Set the laptop panel first time
+  shell: xfce4-panel-profiles load ~/.config/xfce4/panel/profiles/laptop_only.tar.bz2 
+  become: false
+
 - name: Copy over the script
   copy:
     src: hotplug_monitor.sh
@@ -35,6 +39,7 @@
     content: |
       ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/usr/bin/systemctl start hotplug_hdmi.service"
     dest: /etc/udev/rules.d/95-monitor-hotplug.rules
+
 
 # TODO: Set the win key to pop up whiskermenu 
 # Might need this: https://forum.manjaro.org/t/popping-up-whisker-menu-with-super-key/117865/4 (Alt-F1)

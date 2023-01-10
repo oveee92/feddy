@@ -32,7 +32,7 @@ sudo dnf install git python3-pip
 python3 -m pip install ansible --user
 
 # Create the folder and the playbook
-mkdir -p git/ansible && cd git/ansible
+mkdir -p ~/git/ansible && cd ~/git/ansible
 cat << EOF > install.yml
 ---
 - hosts: localhost
@@ -49,6 +49,10 @@ git clone git@github.com:oveee92/feddy.git roles/feddy
 
 # Run the ansible setup
 ansible-playbook install.yml -K
+
+# Update and reboot
+sudo dnf update -y
+reboot
 ```
 
 Example playbooks
