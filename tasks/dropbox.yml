@@ -2,6 +2,7 @@
 
 - name: Fetch and unarchive the dropbox installer
   unarchive:
+    remote_src: true
     src: https://www.dropbox.com/download?plat=lnx.x86_64
     dest: ~/
     creates: ~/.dropbox-dist/dropboxd # Only when this file doesn't exist
