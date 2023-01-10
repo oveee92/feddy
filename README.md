@@ -55,6 +55,9 @@ sudo dnf update -y
 reboot
 ```
 
+After reboot, find the link to register to dropbox with 
+`systemctl status dropbox --user`.
+
 Example playbooks
 -----------------
 ```yaml
