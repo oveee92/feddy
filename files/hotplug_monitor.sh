@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Managed by Ansible
+
 # This script is called by a unit file, hotplug_hdmi.service
 
 # Determine the user (will be decided by the systemd unit file,

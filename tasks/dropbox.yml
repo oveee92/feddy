@@ -24,7 +24,7 @@
   become: false
 
 - name: (dropbox) - Enable the systemd unit file in userspace (dont start until next reboot though)
-  ansible.builtin.systemd:
+  systemd:
     name: dropbox
     scope: user
     enabled: true

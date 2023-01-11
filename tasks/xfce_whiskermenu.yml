@@ -34,12 +34,21 @@
     group: root
   become: true
 
-- name: (xfce_whiskermenu) - Template out the service
+- name: (xfce_whiskermenu) - Template out the systemd unit file
   template:
     src: hotplug_hdmi.service.j2
-    dest: /etc/systemd/system/hotplug_hdmi.service
-  notify: Daemon_reload
-  become: true
+    dest: ~/.config/systemd/user/hotplug_hdmi.service
+  become: false
+
+- name: (xfce_whiskermenu) - Enable the systemd unit file in userspace
+  systemd:
+    name: hotplug_hdmi
+    scope: user
+    enabled: true
+    state: started
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_id }}" # Funny business to let you start services in user scope
+  become: false
 
 - name: (xfce_whiskermenu) - Copy over the udev rule
   copy:
