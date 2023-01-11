@@ -1,6 +1,8 @@
 ---
 
-- name: Install basic packages
+# This taskset installs basic packages, inserts dotfiles, sets hotkeys and other basic operations
+
+- name: (basics) - Install basic packages
   dnf:
     name:
       - remmina
@@ -15,17 +17,19 @@
       - sshpass
       - python3-pip
     state: present
+  become: true
 
-- name: Install pip modules
+- name: (basics) - Install pip modules
   pip:
     name: "{{ item }}"
   loop:
     - ansible
     - virtualenv
+  become: false
 
 # TODO: dotfiles, etc.
 
-- name: Copy dotfiles over
+- name: (basics) - Copy dotfiles over
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"
@@ -34,7 +38,7 @@
       dst: ~/.vimrc
   become: false
 
-- name: Add shortcuts for xfce4
+- name: (basics) - Add shortcuts for xfce4
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"

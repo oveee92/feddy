@@ -1,23 +1,28 @@
 ---
 
-- name: Add Microsoft GPG key
+# This taskset installs VSCode via a repository
+
+- name: (vscode) - Add Microsoft GPG key
   rpm_key:
     key: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
 
-- name: Add VS Code repository
+- name: (vscode) - Add VS Code repository
   yum_repository:
     name: vscode
     description: Visual Studio Code
     baseurl: https://packages.microsoft.com/yumrepos/vscode
     gpgcheck: yes
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
 
-- name: Install VS Code
+- name: (vscode) - Install VS Code
   yum:
     name: code
     state: present
+  become: true
 
-- name: Make sure the keyring directory exists, to allow persistent login for vscode
+- name: (vscode) - Make sure the keyring directory exists, to allow persistent login for vscode
   file:
     path: ~/.local/share/keyrings
     state: directory

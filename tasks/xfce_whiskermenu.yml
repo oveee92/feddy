@@ -1,42 +1,47 @@
 ---
 
-- name: Ensure xfce panel folder exists
+# This taskset configures a custom set of panel profiles and a udev rule that switched
+# profile when plugging in or out an HDMI cable
+
+- name: (xfce_whiskermenu) - Ensure xfce panel folder exists
   file:
     state: directory
     path: ~/.config/xfce4/panel/profiles/
     recurse: true
   become: false
 
-- name: Copy over the panel profiles
+- name: (xfce_whiskermenu) - Copy over the panel profiles
   copy:
     src: "{{ item }}"
     dest: ~/.config/xfce4/panel/profiles/
   loop:
     - laptop_only.tar.bz2
     - widescreen.tar.bz2
-  become: false
   register: panel_profiles_copy
+  become: false
 
-- name: Set the laptop panel first time
+- name: (xfce_whiskermenu) - Set the laptop panel first time
   shell: xfce4-panel-profiles load ~/.config/xfce4/panel/profiles/laptop_only.tar.bz2
   when: panel_profiles_copy.changed
   become: false
 
-- name: Copy over the script
+- name: (xfce_whiskermenu) - Copy over the script
   copy:
     src: hotplug_monitor.sh
     dest: /usr/local/bin/hotplug_monitor
     mode: '0755'
     owner: root
     group: root
+  become: true
 
-- name: Template out the service
+- name: (xfce_whiskermenu) - Template out the service
   template:
     src: hotplug_hdmi.service.j2
     dest: /etc/systemd/system/hotplug_hdmi.service
   notify: Daemon_reload
+  become: true
 
-- name: Copy over the udev rule
+- name: (xfce_whiskermenu) - Copy over the udev rule
   copy:
     content: |
       ACTION=="change", KERNEL=="card0", SUBSYSTEM=="drm", RUN+="/usr/bin/systemctl start hotplug_hdmi.service"

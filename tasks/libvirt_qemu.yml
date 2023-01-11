@@ -1,26 +1,32 @@
 ---
 
-- name: Install the virtualization group
+# This taskset installs libvirt packages and adds your user to the libvirt group
+
+- name: (libvirt_qemu) - Install the virtualization group
   dnf:
     name: '@virtualization'
     state: present
+  become: true
 
-- name: Enable libvirtd
+- name: (libvirt_qemu) - Enable libvirtd
   service:
     name: libvirtd
     enabled: yes
   register: enable_first
+  become: true
 
-- name: Start it if its the first time
+- name: (libvirt_qemu) - Start it if its the first time
   service:
     name: libvirtd
     state: started
   when: enable_first.changed
+  become: true
 
-- name: Add user to libvirt group
+- name: (libvirt_qemu) - Add user to libvirt group
   user:
     name: "{{ lookup('env', 'USER') }}"
     append: true
     groups: libvirt
+  become: true
 
 ...

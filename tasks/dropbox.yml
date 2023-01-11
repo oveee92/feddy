@@ -1,6 +1,8 @@
 ---
 
-- name: Fetch and unarchive the dropbox installer
+# This taskset installs and enables dropbox
+
+- name: (dropbox) - Fetch and unarchive the dropbox installer
   unarchive:
     remote_src: true
     src: https://www.dropbox.com/download?plat=lnx.x86_64
@@ -8,20 +10,20 @@
     creates: ~/.dropbox-dist/dropboxd # Only when this file doesn't exist
   become: false
 
-- name: Ensure directory for userspace systemd exists
+- name: (dropbox) - Ensure directory for userspace systemd exists
   file:
     path: ~/.config/systemd/user
     recurse: yes
     state: directory
   become: false
 
-- name: Template out the systemd unit file
+- name: (dropbox) - Template out the systemd unit file
   template:
     src: dropbox.service.j2
     dest: ~/.config/systemd/user/dropbox.service
   become: false
 
-- name: Enable the systemd unit file in userspace (dont start until next reboot though)
+- name: (dropbox) - Enable the systemd unit file in userspace (dont start until next reboot though)
   ansible.builtin.systemd:
     name: dropbox
     scope: user

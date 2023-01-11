@@ -1,38 +1,38 @@
 ---
 
-- name: Install basic stuff, etc
+- name: Import basics.yml
   include_tasks: basics.yml
   tags: [basics]
 
-- name: Install dropbox for main user
+- name: Import dropbox.yml
   include_tasks: dropbox.yml
   tags: [dropbox]
 
-- name: Install keepassxc for main user
+- name: Import keepassxc.yml
   include_tasks: keepassxc.yml
   tags: [keepassxc]
 
-- name: Install libvirt for virtualization
+- name: Import libvirt_qemu.yml
   include_tasks: libvirt_qemu.yml
   tags: [kvm]
 
-- name: Install VSCode
+- name: Import vscode.yml
   include_tasks: vscode.yml
   tags: [vscode]
 
-- name: Install OnlyOffice
+- name: Import onlyoffice.yml
   include_tasks: onlyoffice.yml
   tags: [onlyoffice]
 
-- name: Install Obsidian notes
+- name: Import obsidian.yml
   include_tasks: obsidian.yml
   tags: [obsidian]
 
-- name: Install and set up the whiskermenu and xfce panels
+- name: Import xfce_whiskermenu.yml
   include_tasks: xfce_whiskermenu.yml
   tags: [xfce]
 
-- name: Set up flameshot to read QR codes
+- name: Import flameshot_qr.yml
   include_tasks: flameshot_qr.yml
   tags: [qr]
 

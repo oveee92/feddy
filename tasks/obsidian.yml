@@ -1,53 +1,59 @@
 ---
 
-- name: Download Obsidian AppImage
+# This taskset installed obsidian.md and adds the appimage to the applications list
+
+- name: (obsidian) - Download Obsidian AppImage
   get_url:
     url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.1.9/Obsidian-1.1.9.AppImage
     dest: /usr/local/bin/obsidian
     mode: '0755'
+  become: true
 
-- name: Check that the dekstop file exists
+- name: (obsidian) - Check that the dekstop file exists
   stat:
     path: /usr/share/applications/obsidian.desktop
   register: desktop_file
+  become: true
 
 - when: not desktop_file.stat.exists
+  become: true
   block:
 
-    - name: Unpack the AppImage into a squashfs-root directory
+    - name: (obsidian) - Unpack the AppImage into a squashfs-root directory
       shell: obsidian --appimage-extract
       args:
         chdir: /usr/local/bin/
 
-    - name: Extract icons from AppImage
+    - name: (obsidian) - Extract icons from AppImage
       copy:
         remote_src: true
         src: /usr/local/bin/squashfs-root/usr/share/icons/
         dest: /usr/share/icons/
 
-    - name: Extract desktop file from AppImage
+    - name: (obsidian) - Extract desktop file from AppImage
       copy:
         remote_src: true
         src: /usr/local/bin/squashfs-root/obsidian.desktop
         dest: /usr/share/applications/
 
-    - name: Remove the squashfs-root directory again
+    - name: (obsidian) - Remove the squashfs-root directory again
       file:
         path: /usr/local/bin/squashfs-root
         recurse: true
         state: absent
 
-- name: Ensure that the Exec field is correct
+- name: (obsidian) - Ensure that the Exec field is correct
   ini_file:
     path: /usr/share/applications/obsidian.desktop
     no_extra_spaces: true
     section: Desktop Entry
     option: Exec
     value: /usr/local/bin/obsidian
+  become: true
 
 # TODO: Config / settings
 
-- name: Add shortcut for Obsidian
+- name: (obsidian) - Add shortcut for Obsidian
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"

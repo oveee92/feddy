@@ -1,11 +1,14 @@
 ---
 
-- name: Install keepassxc
+# This taskset installs and configures keepassxc
+
+- name: (keepassxc) - Install keepassxc
   dnf:
     name: keepassxc
     state: present
+  become: true
 
-- name: Configure keepassxc (General)
+- name: (keepassxc) - Configure keepassxc (General)
   ini_file:
     path: ~/.config/keepassxc/keepassxc.ini
     no_extra_spaces: true
@@ -19,7 +22,7 @@
       val: 'false'
   become: false
 
-- name: Configure keepassxc (GUI)
+- name: (keepassxc) - Configure keepassxc (GUI)
   ini_file:
     path: ~/.config/keepassxc/keepassxc.ini
     no_extra_spaces: true
@@ -39,7 +42,7 @@
       val: 'monochrome-light'
   become: false
 
-- name: Configure keepassxc (PasswordGenerator)
+- name: (keepassxc) - Configure keepassxc (PasswordGenerator)
   ini_file:
     path: ~/.config/keepassxc/keepassxc.ini
     no_extra_spaces: true
@@ -58,7 +61,7 @@
       val: 'true'
   become: false
 
-- name: Configure keepassxc (Security)
+- name: (keepassxc) - Configure keepassxc (Security)
   ini_file:
     path: ~/.config/keepassxc/keepassxc.ini
     no_extra_spaces: true
@@ -72,7 +75,7 @@
       val: 'false'
   become: false
 
-- name: Add shortcut for flameshot
+- name: (keepassxc) - Add shortcut for flameshot
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"

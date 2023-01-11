@@ -1,14 +1,18 @@
 ---
 
-- name: Set up OnlyOffice repo
+# This taskset installs OnlyOffice via a repository
+
+- name: (onlyoffice) - Set up OnlyOffice repo
   dnf:
     name: https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
     state: present
+  become: true
 
-- name: Install OnlyOffice desktop edition
+- name: (onlyoffice) - Install OnlyOffice desktop edition
   dnf:
     name: onlyoffice-desktopeditors
     state: present
+  become: true
 
 # TODO: Config?
 ...
