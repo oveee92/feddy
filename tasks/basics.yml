@@ -36,13 +36,13 @@
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"
   loop:
-    - src: vimrc
+    - src: vimrc 
       dst: ~/.vimrc
     - src: redshift.conf
       dst: ~/.config/redshift.conf
     - src: bashrc
       dst: ~/.bashrc
-    - src: thunar_uca.xml
+    - src: thunar_uca.xml # Thunar file manager custom actions
       dst: ~/.config/Thunar/uca.xml
   become: false
 
