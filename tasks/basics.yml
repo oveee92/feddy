@@ -4,8 +4,9 @@
 
 - name: (basics) - Set hostname first before registering things
   hostname:
-    name: "{{ custom_hostname | default("feddy") }}"
+    name: "{{ custom_hostname | default('feddy') }}"
     use: systemd
+  become: true
 
 - name: (basics) - Install basic packages
   dnf:
@@ -36,6 +37,16 @@
 
 # TODO: dotfiles, etc.
 
+- name: (basics) - Ensure neccesary config folders exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  loop:
+    - ~/.config/xfce4/terminal
+    - ~/.config/Thunar/
+  become: false
+
 - name: (basics) - Copy dotfiles over
   copy:
     src: "{{ item.src }}"
@@ -49,6 +60,8 @@
       dst: ~/.bashrc
     - src: thunar_uca.xml # Thunar file manager custom actions
       dst: ~/.config/Thunar/uca.xml
+    - src: terminalrc
+      dst: ~/.config/xfce4/terminal/terminalrc
   become: false
 
 - name: (basics) - Add shortcuts for xfce4

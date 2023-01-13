@@ -37,6 +37,8 @@ cat << EOF > install.yml
 ---
 - hosts: localhost
   become: true
+  vars:
+    custom_hostname: feddy.domain.xyz
   tasks:
     - import_role:
         name: feddy
