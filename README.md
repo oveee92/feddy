@@ -61,6 +61,12 @@ After reboot, find the link to register to dropbox with
 `systemctl status dropbox --user`. You might have to run
 `systemctl restart dropbox --user` after registering.
 
+TODO
+----
+
+- Set the GTK theme to Adwaita-dark
+- Test the hdmi hotplug service
+
 Example playbooks
 -----------------
 ```yaml
