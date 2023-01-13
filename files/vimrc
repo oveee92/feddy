@@ -1,17 +1,19 @@
 " Managed by Ansible
 
-set background=dark
-set nohlsearch
+set background=dark " Make text nice and visible
+set nohlsearch " Highlight on search is annoying
+" Commented out due to a bug in vi, makes it lag alot
 "set number
-"set relativenumber
+"set relativenumber 
+
 syntax on
 
 " Enable autocompletion
 set wildmode=longest,list,full
 
 " For regular files, set tab to 4 spaces
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set expandtab
 
 " Keep lines below and above the cursor when scrolling
