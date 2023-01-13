@@ -39,7 +39,6 @@
     - name: (obsidian) - Remove the squashfs-root directory again
       file:
         path: /usr/local/bin/squashfs-root
-        recurse: true
         state: absent
 
 - name: (obsidian) - Ensure that the Exec field is correct
