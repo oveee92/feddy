@@ -75,7 +75,7 @@
       val: 'false'
   become: false
 
-- name: (keepassxc) - Add shortcut for flameshot
+- name: (keepassxc) - Add shortcut for keepassxc
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"

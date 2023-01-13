@@ -28,7 +28,7 @@ Log into the fedora desktop with your user, open the terminal and paste the foll
 
 ```bash
 # Install git and ansible
-sudo dnf install git python3-pip
+sudo dnf install git python3-pip -y
 python3 -m pip install ansible --user
 
 # Create the folder and the playbook
@@ -47,9 +47,9 @@ EOF
 
 # Create the role folder and clone this role to it
 mkdir roles
-git clone git@github.com:oveee92/feddy.git roles/feddy
+git clone https://github.com/oveee92/feddy.git roles/feddy
 
-# Run the ansible setup
+# Run the ansible setup (you'll have to write your sudo password here)
 ansible-playbook install.yml -K
 
 # Update and reboot
