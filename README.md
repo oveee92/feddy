@@ -56,7 +56,8 @@ reboot
 ```
 
 After reboot, find the link to register to dropbox with 
-`systemctl status dropbox --user`.
+`systemctl status dropbox --user`. You might have to run
+`systemctl restart dropbox --user` after registering.
 
 Example playbooks
 -----------------

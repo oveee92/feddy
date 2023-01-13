@@ -2,6 +2,11 @@
 
 # This taskset installs basic packages, inserts dotfiles, sets hotkeys and other basic operations
 
+- name: (basics) - Set hostname first before registering things
+  hostname:
+    name: "{{ custom_hostname | default("feddy") }}"
+    use: systemd
+
 - name: (basics) - Install basic packages
   dnf:
     name:
