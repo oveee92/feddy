@@ -40,6 +40,7 @@
   file:
     path: /usr/local/bin/squashfs-root
     state: absent
+  become: true
 
 - name: (obsidian) - Ensure that the Exec field is correct
   ini_file:

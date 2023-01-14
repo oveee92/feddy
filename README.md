@@ -48,10 +48,11 @@ EOF
 mkdir roles
 git clone https://github.com/oveee92/feddy.git roles/feddy
 
-# Run the ansible setup (you'll have to write your sudo password here)
-ansible-playbook install.yml -K
+# Run the ansible setup. '-K' isn't neccesary here as long as you used just sudo a minute ago, but if you
+# are running the playbook from a remote server, or the yum/pip stage takes ages, add -K to the next command
+ansible-playbook install.yml
 
-# Update and reboot
+# Update and reboot (you might have to re-enter your sudo password at this, point, the playbook takes 5+ minutes)
 sudo dnf update -y
 reboot
 ```
