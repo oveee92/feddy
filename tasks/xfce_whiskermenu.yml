@@ -34,7 +34,7 @@
     group: root
   become: true
 
-- name: (xfce_whiskermenu) - Template out the systemd unit file (no need to enable or start it though)
+- name: (xfce_whiskermenu) - Copy over the systemd unit file (no need to enable or start it though)
   copy:
     src: xfce_whiskermenu/hotplug_hdmi.service.j2
     dest: ~/.config/systemd/user/hotplug_hdmi.service

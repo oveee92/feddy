@@ -17,8 +17,8 @@
     state: directory
   become: false
 
-- name: (dropbox) - Template out the systemd unit file
-  template:
+- name: (dropbox) - Copy over the systemd unit file
+  copy:
     src: dropbox.service.j2
     dest: ~/.config/systemd/user/dropbox.service
   become: false
