@@ -64,31 +64,6 @@
       dst: ~/.config/xfce4/terminal/terminalrc
   become: false
 
-- name: (basics) - Add shortcuts for xfce4
-  xfconf:
-    channel: xfce4-keyboard-shortcuts
-    property: "/commands/custom/{{ item.hotkeys }}"
-    value_type: string
-    value: "{{ item.command }}"
-  loop:
-    - hotkeys: '<Super>Return' # Launch terminal
-      command: 'exo-open --launch TerminalEmulator'
-    - hotkeys: '<Shift><Super>s' # Open flameshot
-      command: 'flameshot gui'
-    - hotkeys: '<Super>k' # Open calculator
-      command: 'qalculate-gtk'
-    - hotkeys: '<Super>l' # Lock screen
-      command: 'xflock4'
-    - hotkeys: '<Super>w' # Open open browser
-      command: 'exo-open --launch WebBrowser'
-    - hotkeys: '<Super>m' # Launch mail
-      command: 'exo-open --launch MailReader'
-    - hotkeys: '<Super>v' # Launch clipman history
-      command: 'xfce4-clipman-history'
-    - hotkeys: '<Super>p' # Display settings (quick)
-      command: 'xfce4-display-settings --minimal' # Might need to override this elsewhere
-    - hotkeys: '<Shift><Super>p' # Display settings
-      command: 'xfce4-display-settings'
-  become: false
+
 
 ...
