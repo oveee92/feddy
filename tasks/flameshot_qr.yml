@@ -23,6 +23,6 @@
 
 - name: (flameshot_qr) - Transfer desktop entry
   copy:
-    src: flameshot_qr.desktop
-    dest: ~/.local/share/applications/
+    src: flameshot-qr.desktop
+    dest: /usr/share/applications/flameshot-qr.desktop
     mode: '0664'
