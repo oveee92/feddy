@@ -4,6 +4,10 @@
   include_tasks: basics.yml
   tags: [basics]
 
+- name: (main) - Import xfce_basics.yml
+  include_tasks: basics.yml
+  tags: [xfce_basics]
+
 - name: (main) - Import dropbox.yml
   include_tasks: dropbox.yml
   tags: [dropbox]

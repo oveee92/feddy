@@ -36,7 +36,6 @@ mkdir -p ~/git/ansible && cd ~/git/ansible
 cat << EOF > install.yml
 ---
 - hosts: localhost
-  become: true
   vars:
     custom_hostname: feddy.domain.xyz
   tasks:
@@ -61,20 +60,16 @@ After reboot, find the link to register to dropbox with
 `systemctl status dropbox --user`. You might have to run
 `systemctl restart dropbox --user` after registering.
 
-TODO
-----
-
-- Set the GTK theme to Adwaita-dark
-- Test the hdmi hotplug service
 
 Example playbooks
 -----------------
 ```yaml
 ---
 - hosts: localhost
-  become: true
+  vars:
+    custom_hostname: feddy.domain.xyz
   tasks:
-    - import_tasks:
+    - import_role:
         name: feddy
 ...
 ```
