@@ -19,5 +19,6 @@
     src: flameshot_qr/flameshot-qr.desktop
     dest: /usr/share/applications/flameshot-qr.desktop
     mode: '0664'
+  become: true
 
 ...

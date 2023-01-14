@@ -33,3 +33,4 @@
     property: "/Net/ThemeName"
     value_type: string
     value: "Adwaita-dark"
+  become: false

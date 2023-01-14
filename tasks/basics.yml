@@ -64,6 +64,4 @@
       dst: ~/.config/xfce4/terminal/terminalrc
   become: false
 
-
-
 ...
