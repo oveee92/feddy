@@ -52,7 +52,7 @@ git clone https://github.com/oveee92/feddy.git roles/feddy
 # are running the playbook from a remote server, or the yum/pip stage takes ages, add -K to the next command
 ansible-playbook install.yml
 
-# Update and reboot (you might have to re-enter your sudo password at this, point, the playbook takes 5+ minutes)
+# Update and reboot (you might have to re-enter your sudo password at this point, the playbook takes 5+ minutes)
 sudo dnf update -y
 reboot
 ```
