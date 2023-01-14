@@ -11,9 +11,9 @@
 - name: (flameshot_qr) - Transfer script
   copy:
     src: flameshot_qr
-    dest: /usr/local/bin/
+    dest: /usr/local/bin/flameshot_qr
     mode: '0755'
-  become: false
+  become: true
 
 #- name: (flameshot_qr) - Ensure local applications directory exists
 #  file:
