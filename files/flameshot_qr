@@ -1,6 +1,8 @@
 #!/bin/bash
 
-zbarimg --display $1
+# Managed by Ansible
 
+zbarimg $1
+# zbarimg --display $1 # Use this instead if you also want a picture highlighting which QR codes were found
 echo "Press Enter to close!"
 read

@@ -90,4 +90,5 @@
     - hotkeys: '<Shift><Super>p' # Display settings
       command: 'xfce4-display-settings'
   become: false
+
 ...

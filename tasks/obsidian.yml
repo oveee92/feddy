@@ -62,5 +62,5 @@
     - hotkeys: '<Super>n' # Open Obsidian notes
       command: 'obsidian'
   become: false
-...
 
+...

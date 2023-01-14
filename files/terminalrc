@@ -1,3 +1,4 @@
+# Managed by Ansible
 [Configuration]
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE

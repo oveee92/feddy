@@ -85,3 +85,5 @@
     - hotkeys: '<Primary><Alt>k' # Open keepass
       command: 'keepassxc'
   become: false
+
+...

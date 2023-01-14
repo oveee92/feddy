@@ -1,10 +1,10 @@
+# Managed by Ansible
 [Desktop Entry]
 Version=1.0
-Name=Flameshot_qr
-GenericName=QR_code_reader
+Name=QR
+GenericName=QR
 Comment=Application to read a QR code from an image
-Exec=/usr/local/bin/flameshot_qr %F
-Icon=1
-Terminal=true
+Exec=exo-open --launch TerminalEmulator flameshot_qr %F
+Icon=ibus
 Type=Application
 Categories=Graphics
