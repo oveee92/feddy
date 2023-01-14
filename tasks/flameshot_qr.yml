@@ -1,2 +1,28 @@
 
 # TODO: https://github.com/flameshot-org/flameshot/issues/3050
+
+- name: (flameshot_qr) - Ensure packages are installed
+  dnf:
+    name:
+      - zbar
+      - flameshot
+  become: true
+
+- name: (flameshot_qr) - Transfer script
+  copy:
+    src: flameshot_qr
+    dest: /usr/local/bin/
+    mode: '0755'
+  become: false
+
+#- name: (flameshot_qr) - Ensure local applications directory exists
+#  file:
+#    path: ~/.local/share/applications/
+#    state: directory
+#    recurse: true
+
+- name: (flameshot_qr) - Transfer desktop entry
+  copy:
+    src: flameshot_qr.desktop
+    dest: ~/.local/share/applications/
+    mode: '0664'

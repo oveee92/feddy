@@ -1,0 +1,6 @@
+#!/bin/bash
+
+zbarimg --display $1
+
+echo "Press Enter to close!"
+read

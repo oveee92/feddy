@@ -36,10 +36,10 @@
         src: /usr/local/bin/squashfs-root/obsidian.desktop
         dest: /usr/share/applications/
 
-    - name: (obsidian) - Remove the squashfs-root directory again
-      file:
-        path: /usr/local/bin/squashfs-root
-        state: absent
+- name: (obsidian) - Remove the squashfs-root directory again
+  file:
+    path: /usr/local/bin/squashfs-root
+    state: absent
 
 - name: (obsidian) - Ensure that the Exec field is correct
   ini_file:

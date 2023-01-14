@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Flameshot_qr
+GenericName=QR_code_reader
+Comment=Application to read a QR code from an image
+Exec=/usr/local/bin/zbarimg-flameshot %F
+Icon=1
+Terminal=true
+Type=Application
+Categories=Graphics
