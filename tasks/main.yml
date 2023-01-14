@@ -1,38 +1,38 @@
 ---
 
-- name: Import basics.yml
+- name: (main) - Import basics.yml
   include_tasks: basics.yml
   tags: [basics]
 
-- name: Import dropbox.yml
+- name: (main) - Import dropbox.yml
   include_tasks: dropbox.yml
   tags: [dropbox]
 
-- name: Import keepassxc.yml
+- name: (main) - Import keepassxc.yml
   include_tasks: keepassxc.yml
   tags: [keepassxc]
 
-- name: Import libvirt_qemu.yml
+- name: (main) - Import libvirt_qemu.yml
   include_tasks: libvirt_qemu.yml
   tags: [kvm]
 
-- name: Import vscode.yml
+- name: (main) - Import vscode.yml
   include_tasks: vscode.yml
   tags: [vscode]
 
-- name: Import onlyoffice.yml
+- name: (main) - Import onlyoffice.yml
   include_tasks: onlyoffice.yml
   tags: [onlyoffice]
 
-- name: Import obsidian.yml
+- name: (main) - Import obsidian.yml
   include_tasks: obsidian.yml
   tags: [obsidian]
 
-- name: Import xfce_whiskermenu.yml
+- name: (main) - Import xfce_whiskermenu.yml
   include_tasks: xfce_whiskermenu.yml
   tags: [xfce]
 
-- name: Import flameshot_qr.yml
+- name: (main) - Import flameshot_qr.yml
   include_tasks: flameshot_qr.yml
   tags: [qr]
 

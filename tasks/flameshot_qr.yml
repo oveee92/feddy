@@ -9,14 +9,14 @@
 
 - name: (flameshot_qr) - Transfer script
   copy:
-    src: flameshot_qr
+    src: flameshot_qr/flameshot_qr_script
     dest: /usr/local/bin/flameshot_qr
     mode: '0755'
   become: true
 
 - name: (flameshot_qr) - Transfer desktop entry
   copy:
-    src: flameshot-qr.desktop
+    src: flameshot_qr/flameshot-qr.desktop
     dest: /usr/share/applications/flameshot-qr.desktop
     mode: '0664'
 

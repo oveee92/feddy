@@ -52,15 +52,15 @@
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"
   loop:
-    - src: vimrc 
+    - src: basics/vimrc 
       dst: ~/.vimrc
-    - src: redshift.conf
+    - src: basics/redshift.conf
       dst: ~/.config/redshift.conf
-    - src: bashrc
+    - src: basics/bashrc
       dst: ~/.bashrc
-    - src: thunar_uca.xml # Thunar file manager custom actions
+    - src: basics/thunar_uca.xml # Thunar file manager custom actions; TODO: check for more
       dst: ~/.config/Thunar/uca.xml
-    - src: terminalrc
+    - src: basics/terminalrc
       dst: ~/.config/xfce4/terminal/terminalrc
   become: false
 

@@ -15,8 +15,8 @@
     src: "{{ item }}"
     dest: ~/.config/xfce4/panel/profiles/
   loop:
-    - laptop_only.tar.bz2
-    - widescreen.tar.bz2
+    - xfce_whiskermenu/laptop_only.tar.bz2
+    - xfce_whiskermenu/widescreen.tar.bz2
   register: panel_profiles_copy
   become: false
 
@@ -27,7 +27,7 @@
 
 - name: (xfce_whiskermenu) - Copy over the script
   copy:
-    src: hotplug_monitor.sh
+    src: xfce_whiskermenu/hotplug_monitor.sh
     dest: /usr/local/bin/hotplug_monitor
     mode: '0755'
     owner: root
@@ -35,8 +35,8 @@
   become: true
 
 - name: (xfce_whiskermenu) - Template out the systemd unit file (no need to enable or start it though)
-  template:
-    src: hotplug_hdmi.service.j2
+  copy:
+    src: xfce_whiskermenu/hotplug_hdmi.service.j2
     dest: ~/.config/systemd/user/hotplug_hdmi.service
   become: false
 
@@ -49,8 +49,9 @@
 
 # Set the win key to pop up whiskermenu
 # Based on stargazer's reply in https://forum.manjaro.org/t/popping-up-whisker-menu-with-super-key/117865/4
+# (not 100% sure this is neccesary for Fedora 37, hard to verify when testing in a VM)
 
-- name: (basics) - Add shortcuts for xfce4-popup-whiskermenu to Alt-F1
+- name: (xfce_whiskermenu) - Add shortcuts for xfce4-popup-whiskermenu to Alt-F1
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"
@@ -68,7 +69,7 @@
 
 - name: (xfce_whiskermenu) - Rebind Win key release to Alt-F1
   copy:
-    src: xcape.desktop
+    src: xfce_whiskermenu/xcape.desktop
     dest: ~/.config/autostart/xcape.desktop
     mode: '0664'
   become: false
