@@ -60,6 +60,12 @@
     - hotkeys: '<Alt>F1'
       command: xfce4-popup-whiskermenu
 
+- name: (xfce_whiskermenu) - Make sure the autostart directory exists
+  file:
+    path: ~/.config/autostart
+    state: directory
+    mode: '0700'
+
 - name: (xfce_whiskermenu) - Rebind Win key release to Alt-F1
   copy:
     src: xcape.desktop
