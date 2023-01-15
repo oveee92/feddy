@@ -47,34 +47,16 @@
     dest: /etc/udev/rules.d/95-monitor-hotplug.rules
   become: true
 
-
-# Set the win key to pop up whiskermenu
-# Based on stargazer's reply in https://forum.manjaro.org/t/popping-up-whisker-menu-with-super-key/117865/4
-# (not 100% sure this is neccesary for Fedora 37, hard to verify when testing in a VM)
-
-- name: (xfce_whiskermenu) - Add shortcuts for xfce4-popup-whiskermenu to Alt-F1
+- name: (xfce_whiskermenu) - Add shortcuts for xfce4-popup-whiskermenu to Win
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"
     value_type: string
     value: "{{ item.command }}"
   loop:
-    - hotkeys: '<Alt>F1'
+    - hotkeys: '<Super_L>'
       command: xfce4-popup-whiskermenu
   become: false
 
-- name: (xfce_whiskermenu) - Make sure the autostart directory exists
-  file:
-    path: ~/.config/autostart
-    state: directory
-    mode: '0700'
-  become: false
-
-- name: (xfce_whiskermenu) - Rebind Win key release to Alt-F1
-  copy:
-    src: xfce_whiskermenu/xcape.desktop
-    dest: ~/.config/autostart/xcape.desktop
-    mode: '0664'
-  become: false
 
 ...
