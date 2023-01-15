@@ -13,6 +13,7 @@
     name:
       - remmina
       - firefox
+      - evolution
       - podman
       - podman-compose
       - flameshot
