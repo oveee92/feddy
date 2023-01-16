@@ -62,6 +62,8 @@
   loop:
     - hotkeys: '<Super>n' # Open Obsidian notes
       command: 'obsidian'
+    - hotkeys: '<Super><Shift>n' # Open Obsidian notes
+      command: 'obsidian'
   become: false
 
 ...

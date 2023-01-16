@@ -20,6 +20,7 @@ Dependencies
 
 - git must be installed
 - ansible must be available (preferrably with pip)
+- community.general collection (for copr / whiskermenu)
 
 Example installation
 --------------------
@@ -30,6 +31,7 @@ Log into the fedora desktop with your user, open the terminal and paste the foll
 # Install git and ansible
 sudo dnf install git python3-pip -y
 python3 -m pip install ansible --user
+ansible-galaxy collection install community.general
 
 # Create the folder and the playbook
 mkdir -p ~/git/ansible && cd ~/git/ansible
@@ -57,10 +59,25 @@ sudo dnf update -y
 reboot
 ```
 
+Post-installation stuff
+-----------------------
+
+
 After reboot, find the link to register to dropbox with 
 `systemctl status dropbox --user`. You might have to run
 `systemctl restart dropbox --user` after registering.
 
+Log into Evolution mail.
+
+Log into VSCode.
+
+Set up / import your Obsidian vault (maybe from dropbox?).
+
+Set up your KeepassXC file (maybe from dropbox?)
+
+Download some ISOs for libvirt.
+
+Have fun!
 
 Example playbooks
 -----------------

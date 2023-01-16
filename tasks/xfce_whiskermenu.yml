@@ -52,6 +52,18 @@
 # Based on stargazer's reply in https://forum.manjaro.org/t/popping-up-whisker-menu-with-super-key/117865/4
 # (not 100% sure this is neccesary for Fedora 37, hard to verify when testing in a VM)
 
+- name: (xfce_whiskermenu) - Add the COPR repo for xcape
+  community.general.copr:
+    name: dawid/xcape
+    state: enabled
+  become: true
+
+- name: (xfce_whiskermenu) - Install xcape
+  dnf:
+    name: xcape
+    state: present
+  become: true
+
 - name: (xfce_whiskermenu) - Add shortcuts for xfce4-popup-whiskermenu to Alt-F1
   xfconf:
     channel: xfce4-keyboard-shortcuts
