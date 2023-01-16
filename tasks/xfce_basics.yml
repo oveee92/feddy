@@ -1,6 +1,6 @@
 ---
 
-- name: (xfce_basics) - Add shortcuts for xfce4
+- name: (xfce_basics) - Add shortcuts for xfce4 (general keyboard stuff)
   xfconf:
     channel: xfce4-keyboard-shortcuts
     property: "/commands/custom/{{ item.hotkeys }}"
@@ -19,12 +19,39 @@
       command: 'exo-open --launch WebBrowser'
     - hotkeys: '<Super>m' # Launch mail
       command: 'exo-open --launch MailReader'
+    - hotkeys: '<Super>y' # Launch calendar
+      command: 'evolution -c calendarN'
     - hotkeys: '<Super>v' # Launch clipman history
       command: 'xfce4-clipman-history'
     - hotkeys: '<Super>p' # Display settings (quick)
       command: 'xfce4-display-settings --minimal' # Might need to override this elsewhere
     - hotkeys: '<Shift><Super>p' # Display settings
       command: 'xfce4-display-settings'
+  become: false
+
+- name: (xfce_basics) - Add shortcuts for xfce4 (window manager stuff)
+  xfconf:
+    channel: xfwm4
+    property: "/commands/custom/{{ item.hotkeys }}"
+    value_type: string
+    value: "{{ item.command }}"
+  loop:
+    - hotkeys: '<Super>Left'
+      command: 'tile_left_key'
+    - hotkeys: '<Super>Right'
+      command: 'tile_right_key'
+    - hotkeys: '<Super>Down' # Minimize
+      command: 'hide_window_key' 
+    - hotkeys: '<Super>Up' # Toggle maximize
+      command: 'maximize_window_key'
+    - hotkeys: '<Super>1' # I never use more than 4 anyway
+      command: 'workspace_1_key'
+    - hotkeys: '<Super>2'
+      command: 'workspace_2_key'
+    - hotkeys: '<Super>3'
+      command: 'workspace_3_key'
+    - hotkeys: '<Super>4'
+      command: 'workspace_4_key'
   become: false
   
 - name: (xfce_basics) - Set GTK theme to Adwaita-dark
