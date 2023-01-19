@@ -29,6 +29,24 @@
     state: present
   become: true
 
+- name: (basics) - Install RPM fusion stuff
+  dnf:
+    name:
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-37.noarch.rpm
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-37.noarch.rpm
+    disable_gpg_check: true
+    state: present
+  become: true
+
+- name: (basics) - Install codecs etc. to make firefox work properly
+  dnf:
+    name:
+      - '@multimedia' # stuff to make firefox work
+      - '@sound-and-video'
+      - ffmpeg-libs
+    state: present
+  become: true
+
 - name: (basics) - Install pip modules
   pip:
     name: "{{ item }}"
