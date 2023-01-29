@@ -19,8 +19,10 @@
       command: 'exo-open --launch WebBrowser'
     - hotkeys: '<Super>m' # Launch mail
       command: 'exo-open --launch MailReader'
+    - hotkeys: '<Super>f' # Search filesystem
+      command: 'catfish --hidden'
     - hotkeys: '<Super>y' # Launch calendar
-      command: 'evolution -c calendarN'
+      command: 'evolution -c calendar'
     - hotkeys: '<Super>v' # Launch clipman history
       command: 'xfce4-clipman-history'
     - hotkeys: '<Super>p' # Display settings (quick)

@@ -26,7 +26,19 @@
       - redshift # save your eyes
       - fzf # fuzzy finder
       - meld # diff gui
+      - clapper # video player
     state: present
+  become: true
+
+- name: (basics) - Remove default packages
+  dnf:
+    name:
+      - claws-mail # replaced by evolution
+      - geany # replaced by vscode
+      - galculator # replaced by qalculate
+      - gnumeric # replaced by onlyoffice suite
+      - parole # replaced by clapper
+    state: absent
   become: true
 
 - name: (basics) - Install RPM fusion stuff
