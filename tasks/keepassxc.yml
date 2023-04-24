@@ -70,7 +70,7 @@
     value: "{{ item.val }}"
   loop:
     - opt: LockDatabaseMinimize
-      val: 'true'
+      val: 'false'
     - opt: PasswordsRepeatVisible
       val: 'false'
   become: false

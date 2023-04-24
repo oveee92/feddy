@@ -18,7 +18,7 @@
     - hotkeys: '<Super>w' # Open open browser
       command: 'exo-open --launch WebBrowser'
     - hotkeys: '<Super>m' # Launch mail
-      command: 'exo-open --launch MailReader'
+      command: 'evolution -c mail'
     - hotkeys: '<Super>f' # Search filesystem
       command: 'catfish --hidden'
     - hotkeys: '<Super>y' # Launch calendar
@@ -56,6 +56,12 @@
       command: 'workspace_4_key'
   become: false
   
+- name: (xfce_basics) - Set xfce-terminal theme to Dracula
+  copy:
+    src: Dracula.theme
+    dest: ~/.local/share/xfce4/terminal/colorschemes/
+
+
 - name: (xfce_basics) - Set GTK theme to Adwaita-dark
   xfconf:
     channel: xsettings

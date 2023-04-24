@@ -22,9 +22,9 @@ function disconnect () {
 # Check whether the HDMI is connected or disconnected
 # Can probably be extended further by adding one scenario per connected
 # screen. Does not scale well though.
-if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status)" = "connected" ] ; then
+if [ "$(cat /sys/class/drm/card1-HDMI-A-1/status)" = "connected" ] ; then
   connect
-elif [ "$(cat /sys/class/drm/card0-HDMI-A-1/status)" = "disconnected" ] ; then
+elif [ "$(cat /sys/class/drm/card1-HDMI-A-1/status)" = "disconnected" ] ; then
   disconnect
 else
   exit
