@@ -26,7 +26,8 @@
       - redshift # save your eyes
       - fzf # fuzzy finder
       - meld # diff gui
-      - clapper # video player
+      - mpv # video player
+      - ipcalc # IP calculator
     state: present
   become: true
 
@@ -37,7 +38,7 @@
       - geany # replaced by vscode
       - galculator # replaced by qalculate
       - gnumeric # replaced by onlyoffice suite
-      - parole # replaced by clapper
+      - parole # replaced by mpv
     state: absent
   become: true
 
