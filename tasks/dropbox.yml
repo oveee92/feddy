@@ -14,6 +14,7 @@
   dnf:
     name: nautilus-dropbox
     state: present
+  become: true
 
 - name: (dropbox) - Ensure directory for userspace systemd exists
   file:
