@@ -1,2 +1,101 @@
 ---
-# defaults file for feddy
+
+# Set to either gnome or xfce
+feddy_environment: gnome
+
+# Switch on or off configuration of specific parts
+configure_dropbox: true
+configure_cloud_mount: true
+configure_xfce_whiskermenu: true # Won't install if the feddy_environment != xfce
+configure_flameshot_qr: true
+configure_keepassxc: true
+configure_libvirt_qemu: true
+configure_obsidian: true
+configure_onlyoffice: true
+configure_vscode: true
+
+install_basic_packages:
+  - remmina # rdp, vnc, etc.
+  - firefox
+  - podman
+  - podman-compose
+  - flameshot # snipping tool
+  - qalculate-gtk # calculate anything
+  - openvpn # for openvpn stuff
+  #- openconnect # for cisco anyconnect (not openvpn compatible) # Just install this if needed
+  - sshpass # to make ansible work
+  - python3-pip
+  - fzf # fuzzy finder
+  - meld # diff gui
+  - ipcalc # IP calculator
+  - libreoffice
+
+# default variables
+dconf_custom_hotkeys:
+  - name: Calendar
+    command: gnome-calendar
+    binding: '<Super>y'
+  - name: Flameshot
+    command: flameshot gui
+    binding: '<Shift><Super>s'
+  - name: Obsidian # Open my vault
+    command: 'obsidian obsidian://advanced-uri?vault=ovenotes'
+    binding: '<Shift><Super>n'
+  - name: Obsidian newnote # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
+    command: '<Super>n'
+    binding: "sh -c \"obsidian \\\"obsidian://new?vault=ovenotes&d&append=true&file=Unsorted/note-$(date +'%Y-%m-%d_%H%M')\\\"\""
+  - name: Qalculate # More beefy calculator
+    command: <Shift><Super>k
+    binding: qalculate-gtk
+  - name: Terminal
+    command: gnome-terminal
+    binding: '<Super>Return'
+  - name: KeepassXC
+    command: keepassxc
+    binding: '<Control><Alt>k'
+
+dconf_options:
+  - key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled # obvious
+    val: true
+  - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click # obvious
+    val: true
+  - key: /org/gnome/desktop/peripherals/mouse/natural-scroll # Set the scrolling direction how i like it
+    val: true
+  - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll # Set the scrolling direction how i like it
+    val: false
+  - key: /org/gnome/desktop/interface/color-scheme # Dark mode when possible
+    val: 'prefer-dark'
+  - key: /org/gnome/desktop/session/idle-delay # 5 minutes before screen going idle
+    val: uint32 600
+  - key: /org/gnome/desktop/screensaver/lock-delay # then locking 30 seconds after that
+    val: uint32 30
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled # Make the screen red
+    val: true
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic # following the sun
+    val: true
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-temperature # with just the right ambience
+    val: uint32 2700
+  - key: /org/gnome/settings-daemon/plugins/media-keys/home # Open file manager
+    val: ['<Super>e']
+  - key: /org/gnome/settings-daemon/plugins/media-keys/calculator # Open calculator
+    val: ['<Super>k']
+  - key: /org/gnome/settings-daemon/plugins/media-keys/www # Open web browser
+    val: ['<Super>w']
+  - key: /org/gnome/desktop/interface/clock-show-weekday # Week number
+    val: true
+  - key: /org/gnome/desktop/calendar/show-weekdate # Week number
+    val: true
+  - key: /org/gnome/desktop/wm/preferences/button-layout # Maximize and minimize should be at the edge of windows
+    val: 'appmenu:minimize,maximize,close'
+  - key: /org/gnome/desktop/peripherals/touchpad/click-method # Right click touchpad in corner
+    val: 'areas'
+  - key: /org/gnome/desktop/input-sources/xkb-options # Remap caps lock to escape. Caps lock = both shifts now
+    val: ['lv3:ralt_switch', 'caps:escape', 'shift:both_capslock']
+  - key: /org/gnome/shell/keybindings/focus-active-notification # Remove default unused shortcut
+    state: absent
+  - key: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/audible-bell # Turn off the terminal bell
+    val: false 
+  - key: /org/gnome/desktop/wm/keybindings/toggle-fullscreen # Fullscreen hotkey
+    val: ['<Super>f']
+
+

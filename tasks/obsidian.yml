@@ -2,22 +2,23 @@
 
 # This taskset installed obsidian.md and adds the appimage to the applications list
 
-- name: (obsidian) - Download Obsidian AppImage
-  get_url:
-    url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.1.9/Obsidian-1.1.9.AppImage
-    dest: /usr/local/bin/obsidian
-    mode: '0755'
-  become: true
-
 - name: (obsidian) - Check that the dekstop file exists
   stat:
     path: /usr/share/applications/obsidian.desktop
   register: desktop_file
   become: true
 
-- when: not desktop_file.stat.exists
+- when: not desktop_file.stat.exists # TODO: or force_reinstall_obsidian
   become: true
   block:
+
+    - name: (obsidian) - Download Obsidian AppImage
+      get_url:
+        url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.3.5/Obsidian-1.3.5.AppImage
+        dest: /usr/local/bin/obsidian
+        mode: '0755'
+      become: true
+
 
     - name: (obsidian) - Unpack the AppImage into a squashfs-root directory
       shell: obsidian --appimage-extract
@@ -48,22 +49,7 @@
     no_extra_spaces: true
     section: Desktop Entry
     option: Exec
-    value: /usr/local/bin/obsidian
+    value: /usr/local/bin/obsidian %u
   become: true
-
-# TODO: Config / settings
-
-- name: (obsidian) - Add shortcut for Obsidian
-  xfconf:
-    channel: xfce4-keyboard-shortcuts
-    property: "/commands/custom/{{ item.hotkeys }}"
-    value_type: string
-    value: "{{ item.command }}"
-  loop:
-#    - hotkeys: '<Super>n' # Open Obsidian notes
-#      command: 'obsidian'
-    - hotkeys: '<Super><Shift>n' # Open Obsidian notes
-      command: 'obsidian'
-  become: false
 
 ...

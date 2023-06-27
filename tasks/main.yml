@@ -6,38 +6,59 @@
 
 - name: (main) - Import xfce_basics.yml
   include_tasks: xfce_basics.yml
+  when: '"xfce" in feddy_environment'
   tags: [xfce_basics]
 
 - name: (main) - Import dropbox.yml
   include_tasks: dropbox.yml
+  when: configure_dropbox
   tags: [dropbox]
+
+- name: (main) - Import cloud_mount
+  include_tasks: cloud_mount.yml
+  when: configure_cloud_mount
+  tags: [cloud_mount]
 
 - name: (main) - Import keepassxc.yml
   include_tasks: keepassxc.yml
+  when: configure_keepassxc
   tags: [keepassxc]
 
 - name: (main) - Import libvirt_qemu.yml
   include_tasks: libvirt_qemu.yml
+  when: configure_libvirt_qemu
   tags: [kvm]
 
 - name: (main) - Import vscode.yml
   include_tasks: vscode.yml
+  when: configure_vscode
   tags: [vscode]
 
 - name: (main) - Import onlyoffice.yml
   include_tasks: onlyoffice.yml
+  when: configure_onlyoffice
   tags: [onlyoffice]
 
 - name: (main) - Import obsidian.yml
   include_tasks: obsidian.yml
+  when: configure_obsidian
   tags: [obsidian]
+
+- name: (main) - Import gnome_dconf.yml
+  include_tasks: gnome_dconf.yml
+  when: '"gnome" in feddy_environment'
+  tags: [gnome_dconf]
 
 - name: (main) - Import xfce_whiskermenu.yml
   include_tasks: xfce_whiskermenu.yml
+  when:
+    - '"xfce" in feddy_environment'
+    - configure_xfce_whiskermenu
   tags: [xfce]
 
 - name: (main) - Import flameshot_qr.yml
   include_tasks: flameshot_qr.yml
+  when: configure_flameshot_qr
   tags: [qr]
 
 ...

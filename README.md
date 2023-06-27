@@ -1,29 +1,23 @@
-Role Name
-=========
+# Role Name
 
-Install a Fedora 37 with my preferred setup
+Configure a fresh fedora OS with my preferred setup
 
-Requirements
-------------
+## Requirements
 
-- A clean install of Fedora 37 XFCE4 edition.
+- A clean install of Fedora, either GNOME or XFCE4 (make sure to set the `feddy_environment` variable correctly for XFCE).
 - A regular user with sudo access
 
+## Role Variables
 
-Role Variables
---------------
+Check out `defaults/main.yml`
 
-None I guess (yet)
-
-Dependencies
-------------
+## Dependencies
 
 - git must be installed
 - ansible must be available (preferrably with pip)
 - community.general collection (for copr / whiskermenu)
 
-Example installation
---------------------
+## Example installation
 
 Log into the fedora desktop with your user, open the terminal and paste the following:
 
@@ -50,37 +44,61 @@ EOF
 mkdir roles
 git clone https://github.com/oveee92/feddy.git roles/feddy
 
-# Run the ansible setup. '-K' isn't neccesary here as long as you used just sudo a minute ago, but if you
-# are running the playbook from a remote server, or the yum/pip stage takes ages, add -K to the next command
-ansible-playbook install.yml
+# Run the ansible setup
+ansible-playbook install.yml -K
 
-# Update and reboot (you might have to re-enter your sudo password at this point, the playbook takes 5+ minutes)
+# Update and reboot (you might have to re-enter your sudo password at this point, the playbook takes 5+ minutes to run the first time)
 sudo dnf update -y
 reboot
 ```
 
-Post-installation stuff
------------------------
+## Post-installation stuff
 
 
-After reboot, find the link to register to dropbox with 
-`systemctl status dropbox --user`. You might have to run
-`systemctl restart dropbox --user` after registering.
+### Dropbox / Google Drive / etc
 
-Log into Evolution mail.
+Run `rclone config` and set up your cloud users. Follow [this guide](https://ostechnix.com/how-to-mount-google-drive-locally-as-virtual-file-system-in-linux/).
+D
 
-Log into VSCode.
+Then create the folder (`mkdir GoogleDrive`). Make sure to name your rclone remote the same as the mount directory in your home folder. For example, name it **GoogleDrive** if you plan to mount it to `~/GoogleDrive`.
 
-Set up / import your Obsidian vault (maybe from dropbox?).
+Then run the command `systemctl --user enable rclone@GoogleDrive --now`
 
-Set up your KeepassXC file (maybe from dropbox?)
+**Note** that this will mount the folders "traditionally", only fetching the files you need when you need them. For accessing a file multiple times, vfs will cache the files to make subsequent access faster, but for things like listing all files on the mount, searching through them, etc. it will be VERY slow (2-3 files per second slow, depending on the API limitations and network bandwidth). 
+
+To make it more snappy, consider using `rclone sync` and `rclone copy` to clone the files to local, then set up a cron job to automatically sync every 10 minutes or so to sync changes back to the cloud. Note that this is a one-way sync process and potentially destructive on the destination, and the files will take up space on your hardisk as well as in the cloud. You might just want to use this technique for backup, not daily use.
+
+For proper two-way sync to the local filesystem you should use a client, like dropbox or InSync.
+
+### Dropbox daemon
+
+If using the dropbox daemon, after installation and reboot, find the link to register to dropbox with `systemctl status dropbox --user`. You might have to run `systemctl restart dropbox --user` after registering.
+
+
+### Others 
+
+Log into mail, etc.
+
+Log into and set up VSCode.
+
+Set up theme for terminal
+
+Install GNOME shell extensions
+ - window list
+
+Set up / import your Obsidian vault (maybe from cloud).
+
+Set up your KeepassXC file (maybe from cloud?)
+
+Beautify your libreoffice setup
 
 Download some ISOs for libvirt.
 
 Have fun!
 
-Example playbooks
------------------
+
+## Example playbooks
+
 ```yaml
 ---
 - hosts: localhost

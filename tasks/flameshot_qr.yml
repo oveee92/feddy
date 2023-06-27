@@ -1,5 +1,7 @@
 ---
 
+# Install custom scripts for reading QR codes using flameshot
+
 - name: (flameshot_qr) - Ensure packages are installed
   dnf:
     name:
@@ -14,7 +16,7 @@
     mode: '0755'
   become: true
 
-- name: (flameshot_qr) - Transfer desktop entry
+- name: (flameshot_qr) - Transfer desktop entry (to allow opening it with flameshot)
   copy:
     src: flameshot_qr/flameshot-qr.desktop
     dest: /usr/share/applications/flameshot-qr.desktop

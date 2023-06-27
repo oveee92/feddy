@@ -40,3 +40,5 @@ shopt -s checkwinsize
 
 export VISUAL=vim
 export EDITOR=vim
+
+export LC_TIME=nb_NO.utf8 # TO make calendar stuff work as we like it

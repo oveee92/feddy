@@ -1,5 +1,47 @@
 ---
 
+- name: (xfce_basics) - Install basic packages
+  dnf:
+    name:
+      - redshift # save your eyes (not working for wayland i think)
+      - mpv # video player
+    state: present
+  become: true
+
+- name: (xfce_basics) - Remove default packages for xfce
+  dnf:
+    name:
+      - claws-mail # replaced by evolution
+      - geany # replaced by vscode
+      - galculator # replaced by qalculate
+      - gnumeric # replaced by onlyoffice suite
+      - parole # replaced by mpv
+    state: absent
+  become: true
+
+- name: (xfce_basics) - Ensure neccesary config folders exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  loop:
+    - ~/.config/xfce4/terminal
+    - ~/.config/Thunar/
+  become: false
+
+- name: (xfce_basics) - Copy dotfiles over
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+  loop:
+    - src: basics/redshift.conf
+      dst: ~/.config/redshift.conf
+    - src: basics/thunar_uca.xml
+      dst: ~/.config/Thunar/uca.xml
+    - src: basics/terminalrc
+      dst: ~/.config/xfce4/terminal/terminalrc
+  become: false
+
 - name: (xfce_basics) - Add shortcuts for xfce4 (general keyboard stuff)
   xfconf:
     channel: xfce4-keyboard-shortcuts
@@ -29,6 +71,10 @@
       command: 'xfce4-display-settings --minimal' # Might need to override this elsewhere
     - hotkeys: '<Shift><Super>p' # Display settings
       command: 'xfce4-display-settings'
+    - hotkeys: '<Super><Shift>n' # Open Obsidian notes
+      command: 'obsidian'
+    - hotkeys: '<Primary><Alt>k' # Open keepass
+      command: 'keepassxc'
   become: false
 
 - name: (xfce_basics) - Add shortcuts for xfce4 (window manager stuff)

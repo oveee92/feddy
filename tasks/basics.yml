@@ -10,36 +10,8 @@
 
 - name: (basics) - Install basic packages
   dnf:
-    name:
-      - remmina # rdp, vnc, etc.
-      - firefox
-      - evolution
-      - podman
-      - podman-compose
-      - flameshot # snipping tool
-      - clipman # Clipboard manager
-      - qalculate-gtk # calculate anything
-      - openvpn # for openvpn stuff
-      - openconnect # for cisco anyconnect (not openvpn compatible)
-      - sshpass # to make ansible work
-      - python3-pip
-      - redshift # save your eyes
-      - fzf # fuzzy finder
-      - meld # diff gui
-      - mpv # video player
-      - ipcalc # IP calculator
+    name: "{{ install_basic_packages }}"
     state: present
-  become: true
-
-- name: (basics) - Remove default packages
-  dnf:
-    name:
-      - claws-mail # replaced by evolution
-      - geany # replaced by vscode
-      - galculator # replaced by qalculate
-      - gnumeric # replaced by onlyoffice suite
-      - parole # replaced by mpv
-    state: absent
   become: true
 
 - name: (basics) - Install RPM fusion stuff
@@ -68,18 +40,6 @@
     - virtualenv
   become: false
 
-# TODO: dotfiles, etc.
-
-- name: (basics) - Ensure neccesary config folders exist
-  file:
-    path: "{{ item }}"
-    state: directory
-    recurse: true
-  loop:
-    - ~/.config/xfce4/terminal
-    - ~/.config/Thunar/
-  become: false
-
 - name: (basics) - Copy dotfiles over
   copy:
     src: "{{ item.src }}"
@@ -87,14 +47,9 @@
   loop:
     - src: basics/vimrc 
       dst: ~/.vimrc
-    - src: basics/redshift.conf
-      dst: ~/.config/redshift.conf
     - src: basics/bashrc
       dst: ~/.bashrc
-    - src: basics/thunar_uca.xml # Thunar file manager custom actions; TODO: check for more
-      dst: ~/.config/Thunar/uca.xml
-    - src: basics/terminalrc
-      dst: ~/.config/xfce4/terminal/terminalrc
+    # TODO: tmux
   become: false
 
 ...

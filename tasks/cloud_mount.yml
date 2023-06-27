@@ -1,0 +1,22 @@
+---
+
+- name: (cloud_mount) - Ensure rclone is present
+  dnf:
+    name: rclone
+    state: present
+  become: true
+
+- name: (cloud_mount) - Ensure directory for userspace systemd exists
+  file:
+    path: ~/.config/systemd/user
+    recurse: yes
+    state: directory
+  become: false
+
+- name: (cloud_mount) - Copy the template-service to systemd userspace
+  copy:
+    src: cloud_storage/rclone.service
+    dest: ~/.config/systemd/user/rclone@.service
+  become: false
+
+...
