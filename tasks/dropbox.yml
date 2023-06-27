@@ -21,6 +21,7 @@
   copy:
     src: dropbox.service.j2
     dest: ~/.config/systemd/user/dropbox.service
+  notify: Daemon_reload
   become: false
 
 - name: (dropbox) - Enable the systemd unit file in userspace (dont start until next reboot though)

@@ -20,6 +20,12 @@
       val: 'true'
     - opt: UseAtomicSaves
       val: 'false'
+    - opt: GlobalAutoTypeModifiers # Ctrl Alt
+      val: 201326592
+    - opt: GlobalAutoTypeKey # A
+      val: 65
+    - opt: HideWindowOnCopy
+      val: 'true'
   become: false
 
 - name: (keepassxc) - Configure keepassxc (GUI)
@@ -35,11 +41,13 @@
     - opt: MinimizeOnClose
       val: 'true'
     - opt: MinimizeOnStartup
-      val: 'true'
+      val: 'false'
     - opt: ShowTrayIcon
       val: 'true'
     - opt: TrayIconAppearance
       val: 'monochrome-light'
+
+
   become: false
 
 - name: (keepassxc) - Configure keepassxc (PasswordGenerator)
@@ -53,11 +61,13 @@
     - opt: AdvancedMode
       val: 'true'
     - opt: ExcludedChars
-      val: |-
-        \"'^~`'
+      val: >-
+        /\\\"'^~`'|
     - opt: Length
       val: 16
     - opt: Logograms
+      val: 'true'
+    - opt: Dashes
       val: 'true'
   become: false
 

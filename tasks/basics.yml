@@ -14,11 +14,16 @@
     state: present
   become: true
 
+- name: (basics) - Fetch the fedora version to get the correct RPM fusion link
+  command: 'rpm -E %fedora'
+  register: version_cmd
+  check_mode: no
+
 - name: (basics) - Install RPM fusion stuff
   dnf:
     name:
-      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-37.noarch.rpm
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-37.noarch.rpm
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
     disable_gpg_check: true
     state: present
   become: true
