@@ -23,16 +23,21 @@
   dnf:
     name:
       - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
+      #- https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
     disable_gpg_check: true
     state: present
+  become: true
+
+- name: (basics) - Swap out the fedora ffmpeg-free package for the rpmfusion version
+  command: dnf swap ffmpeg-free ffmpeg --allowerasing -y
+  when: '"gnome" in feddy_environment'
   become: true
 
 - name: (basics) - Install codecs etc. to make firefox work properly
   dnf:
     name:
       - '@multimedia' # stuff to make firefox work
-      - '@sound-and-video'
+      #- '@sound-and-video' # No packages in this one, and optional ones conflict with existing packages
       - ffmpeg-libs
     state: present
   become: true
