@@ -10,6 +10,11 @@
     creates: ~/.dropbox-dist/dropboxd # Only when this file doesn't exist
   become: false
 
+- name: (dropbox) - Install dropbox nautilus extension (requires rpmfusion non-free)
+  dnf:
+    name: nautilus-dropbox
+    state: present
+
 - name: (dropbox) - Ensure directory for userspace systemd exists
   file:
     path: ~/.config/systemd/user

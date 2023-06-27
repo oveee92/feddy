@@ -5,9 +5,8 @@ Description=Dropbox as a user service
 After=local-fs.target network.target
 
 [Service]
-Type=simple
-ExecStartPre=/bin/sleep 15
-ExecStart=%h/.dropbox-dist/dropboxd
+Type=forking
+ExecStart=/usr/bin/dropbox start -i
 Restart=always
 RestartSec=5
 
