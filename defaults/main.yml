@@ -31,7 +31,7 @@ install_basic_packages:
   - libreoffice
 
 # default variables
-dconf_custom_hotkeys:
+dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something so that dconf won't die dramatically when I try to quote the variables below
   - name: Calendar
     command: gnome-calendar
     binding: <Super>y

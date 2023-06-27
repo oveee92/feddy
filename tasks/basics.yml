@@ -22,15 +22,15 @@
 - name: (basics) - Install RPM fusion stuff
   dnf:
     name:
-      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm # needed for ffmpeg, etc.
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm # needed for dropbox, etc.
     disable_gpg_check: true
     state: present
   become: true
 
 - name: (basics) - Swap out the fedora ffmpeg-free package for the rpmfusion version
   command: dnf swap ffmpeg-free ffmpeg --allowerasing -y
-  when: '"gnome" in feddy_environment'
+  when: '"gnome" in feddy_environment' # TODO: Not sure if this is a problem with gnome, or just after Fedora 37 in general. Needs testing on xfce
   become: true
 
 - name: (basics) - Install codecs etc. to make firefox work properly
