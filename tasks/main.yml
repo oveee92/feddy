@@ -20,7 +20,7 @@
   tags: [cloud_mount]
 
 - name: (main) - Import keepassxc.yml
-  impor_tasks: keepassxc.yml
+  import_tasks: keepassxc.yml
   when: configure_keepassxc
   tags: [keepassxc]
 
