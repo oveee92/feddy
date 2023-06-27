@@ -22,13 +22,13 @@
     hotkey_iterated: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom{{ idx }}"
     mydict_name:
       key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom{{ idx }}/name"
-      val: "{{ hotkey.name }}"
+      val: "'{{ hotkey.name }}'"
     mydict_binding:
       key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom{{ idx }}/binding"
-      val: "{{ hotkey.binding }}"
+      val: "'{{ hotkey.binding }}'"
     mydict_command:
       key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom{{ idx }}/command"
-      val: "{{ hotkey.command }}"
+      val: "'{{ hotkey.command }}'"
   set_fact: # And add those variables to the "cumulative" arrays
     _hotkey_list: "{{ _hotkey_list + [ hotkey_iterated ] }}" # Add the new hotkey to the array (one per hotkey)
     _dconf_variable_list: "{{ _dconf_variable_list + [ mydict_name ] + [ mydict_binding ] + [ mydict_command ] }}" # Add 3 key/value pairs for each hotkey (name, binding and command)
@@ -50,7 +50,7 @@
 - name: Set dconf parameters for custom hotkeys
   dconf:
     key: "{{ item.key }}"
-    value: "'{{ item.val | string }}'"
+    value: "{{ item.val }}"
     state: "{{ item.state | default('present') }}"
   loop: "{{ _dconf_variable_list }}"
   become: false
