@@ -50,7 +50,7 @@
 - name: Set dconf parameters for custom hotkeys
   dconf:
     key: "{{ item.key }}"
-    value: "{{ item.val | string }}"
+    value: "'{{ item.val | string }}'"
     state: "{{ item.state | default('present') }}"
   loop: "{{ _dconf_variable_list }}"
   become: false
