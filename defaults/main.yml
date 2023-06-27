@@ -64,7 +64,7 @@ dconf_options:
   - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll # Set the scrolling direction how i like it
     val: false
   - key: /org/gnome/desktop/interface/color-scheme # Dark mode when possible
-    val: 'prefer-dark'
+    val: "'prefer-dark'"
   - key: /org/gnome/desktop/session/idle-delay # 5 minutes before screen going idle
     val: uint32 600
   - key: /org/gnome/desktop/screensaver/lock-delay # then locking 30 seconds after that
@@ -86,9 +86,9 @@ dconf_options:
   - key: /org/gnome/desktop/calendar/show-weekdate # Week number
     val: true
   - key: /org/gnome/desktop/wm/preferences/button-layout # Maximize and minimize should be at the edge of windows
-    val: 'appmenu:minimize,maximize,close'
+    val: "'appmenu:minimize,maximize,close'"
   - key: /org/gnome/desktop/peripherals/touchpad/click-method # Right click touchpad in corner
-    val: 'areas'
+    val: "'areas'"
   - key: /org/gnome/desktop/input-sources/xkb-options # Remap caps lock to escape. Caps lock = both shifts now
     val: ['lv3:ralt_switch', 'caps:escape', 'shift:both_capslock']
   - key: /org/gnome/shell/keybindings/focus-active-notification # Remove default unused shortcut
