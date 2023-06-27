@@ -42,7 +42,7 @@
   vars:
     dict_cumulative:
       key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-      val: "'{{ _hotkey_list | string }}'"
+      val: "{{ _hotkey_list | string }}"
   set_fact:
     _dconf_variable_list: "{{ _dconf_variable_list + [ dict_cumulative ] }}"
   become: false
