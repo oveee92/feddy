@@ -32,17 +32,17 @@ install_basic_packages:
 
 # default variables
 dconf_custom_hotkeys:
-  - name: Calendar
-    command: gnome-calendar
-    binding: '<Super>y'
-  - name: Flameshot
-    command: flameshot gui
-    binding: '<Shift><Super>s'
-  - name: Obsidian # Open my vault
-    command: 'obsidian obsidian://advanced-uri?vault=ovenotes'
-    binding: '<Shift><Super>n'
-  - name: Obsidian newnote # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
-    command: '<Super>n'
+  - name: "'Calendar'"
+    command: "'gnome-calendar'"
+    binding: "'<Super>y'"
+  - name: "'Flameshot'"
+    command: "'flameshot gui'"
+    binding: "'<Shift><Super>s'"
+  - name: "'Obsidian'" # Open my vault
+    command: "'obsidian obsidian://advanced-uri?vault=ovenotes'"
+    binding: "'<Shift><Super>n'"
+  - name: "'Obsidian newnote'" # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
+    command: "'<Super>n'"
     binding: "sh -c \"obsidian \\\"obsidian://new?vault=ovenotes&d&append=true&file=Unsorted/note-$(date +'%Y-%m-%d_%H%M')\\\"\""
   - name: Qalculate # More beefy calculator
     command: <Shift><Super>k
