@@ -23,7 +23,7 @@
   dnf:
     name:
       - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm
-      #- https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm
     disable_gpg_check: true
     state: present
   become: true
@@ -48,6 +48,7 @@
   loop:
     - ansible
     - virtualenv
+    - psutil # for gnome / dconf
   become: false
 
 - name: (basics) - Copy dotfiles over
