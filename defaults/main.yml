@@ -43,12 +43,11 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
     command: obsidian
     binding: <Shift><Super>n
   - name: Obsidian newnote # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
-    command: <Super>n
-    #binding: 'sh -c "obsidian \\"obsidian://new?vault=ovenotes&d&append=true&file=Unsorted/note-$(date +%Y-%m-%d_%H%M)\\""'
-    binding: 'sh -c "obsidian \\"obsidian://new?&append=true&file=Unsorted/note-$(date +%Y-%m-%d_%H%M)\\""'
+    command: 'sh -c "obsidian \\"obsidian://new?&append=true&file=Unsorted/note-$(date +%Y-%m-%d_%H%M)\\""'
+    binding: <Super>n
   - name: Qalculate # More beefy calculator
-    command: <Shift><Super>k
-    binding: qalculate-gtk
+    command: qalculate-gtk
+    binding: <Shift><Super>k
   - name: Terminal
     command: gnome-terminal
     binding: '<Super>Return'
@@ -58,13 +57,13 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
 
 dconf_options:
   - key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled # obvious
-    val: true
+    val: 'true'
   - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click # obvious
-    val: true
+    val: 'true'
   - key: /org/gnome/desktop/peripherals/mouse/natural-scroll # Set the scrolling direction how i like it
-    val: true
+    val: 'true'
   - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll # Set the scrolling direction how i like it
-    val: false
+    val: 'false'
   - key: /org/gnome/desktop/interface/color-scheme # Dark mode when possible
     val: "'prefer-dark'"
   - key: /org/gnome/desktop/session/idle-delay # 5 minutes before screen going idle
@@ -72,9 +71,9 @@ dconf_options:
   - key: /org/gnome/desktop/screensaver/lock-delay # then locking 30 seconds after that
     val: uint32 30
   - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled # Make the screen red
-    val: true
+    val: 'true'
   - key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic # following the sun
-    val: true
+    val: 'true'
   - key: /org/gnome/settings-daemon/plugins/color/night-light-temperature # with just the right ambience
     val: uint32 2700
   - key: /org/gnome/settings-daemon/plugins/media-keys/home # Open file manager
@@ -84,9 +83,9 @@ dconf_options:
   - key: /org/gnome/settings-daemon/plugins/media-keys/www # Open web browser
     val: ['<Super>w']
   - key: /org/gnome/desktop/interface/clock-show-weekday # Week number
-    val: true
+    val: 'true'
   - key: /org/gnome/desktop/calendar/show-weekdate # Week number
-    val: true
+    val: 'true'
   - key: /org/gnome/desktop/wm/preferences/button-layout # Maximize and minimize should be at the edge of windows
     val: "'appmenu:minimize,maximize,close'"
   - key: /org/gnome/desktop/peripherals/touchpad/click-method # Right click touchpad in corner
@@ -94,9 +93,9 @@ dconf_options:
   - key: /org/gnome/desktop/input-sources/xkb-options # Remap caps lock to escape. Caps lock = both shifts now
     val: ['lv3:ralt_switch', 'caps:escape', 'shift:both_capslock']
   - key: /org/gnome/shell/keybindings/focus-active-notification # Remove default unused shortcut
-    state: absent
+    val: '@as []' # basically absent
   - key: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/audible-bell # Turn off the terminal bell
-    val: false 
+    val: 'false' 
   - key: /org/gnome/desktop/wm/keybindings/toggle-fullscreen # Fullscreen hotkey
     val: ['<Super>f']
 

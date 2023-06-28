@@ -49,6 +49,11 @@
   when: '"gnome" in feddy_environment'
   tags: [gnome_dconf]
 
+- name: (main) - Import gnome_other.yml
+  import_tasks: gnome_other.yml
+  when: '"gnome" in feddy_environment'
+  tags: [gnome_dconf]
+
 - name: (main) - Import xfce_whiskermenu.yml
   import_tasks: xfce_whiskermenu.yml
   when:
