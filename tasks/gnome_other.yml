@@ -1,0 +1,6 @@
+---
+
+- name: (gnome_other) - Activate the window list
+  command: gnome-extensions enable window-list@gnome-shell-extensions.gcampax.github.com
+
+# TODO: Add the AppIndicator and KStatusNotifier Support
