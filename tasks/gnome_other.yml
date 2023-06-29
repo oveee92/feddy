@@ -1,6 +1,54 @@
 ---
 
+# Window list at the bottom
+
 - name: (gnome_other) - Activate the window list
   command: gnome-extensions enable window-list@gnome-shell-extensions.gcampax.github.com
+  become: false
 
-# TODO: Add the AppIndicator and KStatusNotifier Support
+# Terminal theme stuff
+
+- name: (gnome_other) - Get the terminal profiles list
+  dconf:
+    state: read
+    key: "/org/gnome/terminal/legacy/profiles:/list"
+  register: _terminal_profiles
+  become: false
+
+- name: (gnome_other) - Create a variable to work with
+  set_fact:
+    _terminal_profile_custom: ""
+  become: false
+
+- name: (gnome_other) - Select the first profile by default
+  vars:
+    _intermediary: "{{ _terminal_profiles.value }}"
+  set_fact:
+    _terminal_profile_custom: "{{ _intermediary[0] }}"
+  when: terminal_profile_to_edit == ""
+  become: false
+
+- name: (gnome_other) - Select custom profile if it exists
+  set_fact:
+    _terminal_profile_custom: "{{ terminal_profile_to_edit }}"
+  when:
+    - terminal_profile_to_edit != ""
+    - terminal_profile_to_edit in _terminal_profiles.value
+  become: false
+
+- name: (gnome_other) - If a terminal profile was decided, set the dracula theme
+  when: _terminal_profile_custom != ""
+  dconf:
+    key: "/org/gnome/terminal/legacy/profiles:/:{{ _terminal_profile_custom }}/{{ item.key }}" # pay attention to the colons
+    value: "{{ item.val }}"
+  loop: "{{ gnome_terminal_settings }}"
+  become: false
+
+- name: (gnome_other) - Set the Solarized dark dircolors, for pretty directory listings
+  copy:
+    src: gnome_other/dircolors.ansi-dark
+    dest: ~/.dircolors
+    mode: '0644'
+  become: false
+
+# TODO: Add the AppIndicator and KStatusNotifier Support if possible

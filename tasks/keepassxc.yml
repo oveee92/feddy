@@ -8,81 +8,13 @@
     state: present
   become: true
 
-- name: (keepassxc) - Configure keepassxc (General)
+- name: (keepassxc) - Configure keepassxc
   ini_file:
     path: ~/.config/keepassxc/keepassxc.ini
     no_extra_spaces: true
-    section: General
+    section: "{{ item.section }}"
     option: "{{ item.opt }}"
     value: "{{ item.val }}"
-  loop:
-    - opt: BackupBeforeSave
-      val: 'true'
-    - opt: UseAtomicSaves
-      val: 'false'
-    - opt: GlobalAutoTypeModifiers # Ctrl Alt
-      val: 201326592
-    - opt: GlobalAutoTypeKey # A
-      val: 65
-    - opt: HideWindowOnCopy
-      val: 'true'
+  loop: "{{ keepass_settings }}"
   become: false
-
-- name: (keepassxc) - Configure keepassxc (GUI)
-  ini_file:
-    path: ~/.config/keepassxc/keepassxc.ini
-    no_extra_spaces: true
-    section: GUI
-    option: "{{ item.opt }}"
-    value: "{{ item.val }}"
-  loop:
-    - opt: ApplicationTheme
-      val: 'dark'
-    - opt: MinimizeOnClose
-      val: 'true'
-    - opt: MinimizeOnStartup
-      val: 'false'
-    - opt: ShowTrayIcon
-      val: 'true'
-    - opt: TrayIconAppearance
-      val: 'monochrome-light'
-
-
-  become: false
-
-- name: (keepassxc) - Configure keepassxc (PasswordGenerator)
-  ini_file:
-    path: ~/.config/keepassxc/keepassxc.ini
-    no_extra_spaces: true
-    section: PasswordGenerator
-    option: "{{ item.opt }}"
-    value: "{{ item.val }}"
-  loop:
-    - opt: AdvancedMode
-      val: 'true'
-    - opt: ExcludedChars
-      val: >-
-        /\\\"'^~`'|
-    - opt: Length
-      val: 16
-    - opt: Logograms
-      val: 'true'
-    - opt: Dashes
-      val: 'true'
-  become: false
-
-- name: (keepassxc) - Configure keepassxc (Security)
-  ini_file:
-    path: ~/.config/keepassxc/keepassxc.ini
-    no_extra_spaces: true
-    section: Security
-    option: "{{ item.opt }}"
-    value: "{{ item.val }}"
-  loop:
-    - opt: LockDatabaseMinimize
-      val: 'false'
-    - opt: PasswordsRepeatVisible
-      val: 'false'
-  become: false
-
 ...

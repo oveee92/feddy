@@ -16,6 +16,8 @@
 
 - name: (basics) - Fetch the fedora version to get the correct RPM fusion link
   command: 'rpm -E %fedora'
+  failed_when: version_cmd.rc != 0
+  changed_when: false
   register: version_cmd
   check_mode: no
 
@@ -30,6 +32,8 @@
 
 - name: (basics) - Swap out the fedora ffmpeg-free package for the rpmfusion version
   command: dnf swap ffmpeg-free ffmpeg --allowerasing -y
+  register: _dnf_results
+  changed_when: "'Nothing to do.' not in _dnf_results.stdout_lines"
   when: '"gnome" in feddy_environment' # TODO: Not sure if this is a problem with gnome, or just after Fedora 37 in general. Needs testing on xfce
   become: true
 

@@ -1,6 +1,6 @@
 ---
 
-# Set to either gnome or xfce
+# Set to either gnome or xfce (xfce parts have been neglected by me, use at your own risk)
 feddy_environment: gnome
 
 # Switch on or off configuration of specific parts
@@ -14,6 +14,7 @@ configure_obsidian: true
 configure_onlyoffice: true
 configure_vscode: true
 
+# List of packages that should be installed with yum/dnf
 install_basic_packages:
   - remmina # rdp, vnc, etc.
   - firefox
@@ -29,8 +30,9 @@ install_basic_packages:
   - meld # diff gui
   - ipcalc # IP calculator
   - libreoffice
+  - evolution # mail
 
-# default variables
+# Custom hotkeys
 dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something so that dconf won't die dramatically when I try to quote the variables below
   - name: Calendar
     command: gnome-calendar
@@ -55,6 +57,7 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
     command: keepassxc
     binding: '<Control><Alt>k'
 
+# General dconf options
 dconf_options:
   - key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled # obvious
     val: 'true'
@@ -94,9 +97,110 @@ dconf_options:
     val: ['lv3:ralt_switch', 'caps:escape', 'shift:both_capslock']
   - key: /org/gnome/shell/keybindings/focus-active-notification # Remove default unused shortcut
     val: '@as []' # basically absent
-  - key: /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/audible-bell # Turn off the terminal bell
-    val: 'false' 
   - key: /org/gnome/desktop/wm/keybindings/toggle-fullscreen # Fullscreen hotkey
     val: ['<Super>f']
+  - key: /org/gnome/desktop/input-sources/per-window # Dont want to set keyboard input per window
+    val: 'false'
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-1
+    val: ['<Shift><Super>1']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-2
+    val: ['<Shift><Super>2']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-3
+    val: ['<Shift><Super>3']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-4
+    val: ['<Shift><Super>4']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-1
+    val: ['<Super>1']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-2
+    val: ['<Super>2']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-3
+    val: ['<Super>3']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-4
+    val: ['<Super>4']
+  - key: /org/gnome/mutter/dynamic-workspaces
+    val: 'true'
 
+# Set a custom profile here, if you don't want to override the first profile in the dconf list
+terminal_profile_to_edit: ""
 
+# The dconf settings within the chosen terminal profile
+gnome_terminal_settings:
+  - key: audible-bell
+    val: 'false'
+    # Dracula theme
+  - key: background-color
+    val: "'#282A36'"
+  - key: bold-color
+    val: "'#6E46A4'"
+  - key: bold-color-same-as-fg
+    val: 'false'
+  - key: font
+    val: "'Monospace 10'"
+  - key: foreground-color
+    val: "'#F8F8F2'"
+  - key: palette
+    val: ['#262626', '#E356A7', '#42E66C', '#E4F34A', '#9B6BDF', '#E64747', '#75D7EC', '#EFA554', '#7A7A7A', '#FF79C6', '#50FA7B', '#F1FA8C', '#BD93F9', '#FF5555', '#8BE9FD', '#FFB86C']
+  - key: use-system-font
+    val: 'false'
+  - key: use-theme-colors
+    val: 'false'
+
+# The settings that will be added to the keepassxc.ini config file
+keepass_settings:
+  # General
+  - section: General
+    opt: BackupBeforeSave
+    val: 'true'
+  - section: General
+    opt: UseAtomicSaves
+    val: 'false'
+  - section: General
+    opt: GlobalAutoTypeModifiers 
+    val: 201326592 # Ctrl Alt probably
+  - section: General
+    opt: GlobalAutoTypeKey # A
+    val: 65
+  - section: General
+    opt: HideWindowOnCopy
+    val: 'true'
+  # GUI
+  - section: GUI
+    opt: ApplicationTheme
+    val: 'dark'
+  - section: GUI
+    opt: MinimizeOnClose
+    val: 'true'
+  - section: GUI
+    opt: MinimizeOnStartup
+    val: 'false'
+  - section: GUI
+    opt: ShowTrayIcon
+    val: 'true'
+  - section: GUI
+    opt: TrayIconAppearance
+    val: 'monochrome-light'
+  # PasswordGenerator
+  - section: PasswordGenerator
+    opt: AdvancedMode
+    val: 'true'
+  - section: PasswordGenerator
+    opt: ExcludedChars
+    val: >-
+      /\\\"'^~`'|
+  - section: PasswordGenerator
+    opt: Length
+    val: 16
+  - section: PasswordGenerator
+    opt: Logograms
+    val: 'true'
+  - section: PasswordGenerator
+    opt: Dashes
+    val: 'true'
+  # Security
+  - section: Security
+    opt: LockDatabaseMinimize
+    val: 'false'
+  - section: Security
+    opt: PasswordsRepeatVisible
+    val: 'false'
+    
