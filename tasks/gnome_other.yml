@@ -27,35 +27,38 @@
     _terminal_profile_custom: ""
   become: false
 
-- name: (gnome_other) - When profiles list is empty and a custom profile has not been set
-  when:
-    - not _terminal_profiles.value or _terminal_profiles.value | length == 0
-    - terminal_profile_to_edit == ""
-  block:
-    - name: (gnome_other) - Create a random uuid
-      dconf:
-        key: /org/gnome/terminal/legacy/profiles:/list
-        value: "['{{ 9999999999999999999999 | random | to_uuid }}']"
-    - name: (gnome_other) - Set it in dconf as a new profile
-      set_fact:
-        _terminal_profiles.value: "['{{ 9999999999999999999999 | random | to_uuid }}']"
-  become: false
-
-
-- name: (gnome_other) - Select the first profile by default
-  vars:
-    _intermediary: "{{ _terminal_profiles.value }}"
-  set_fact:
-    _terminal_profile_custom: "{{ _intermediary[0] }}"
-  when: terminal_profile_to_edit == ""
-  become: false
-
-- name: (gnome_other) - Select custom profile if it exists
+- name: (gnome_other) - Select a custom profile if it has been defined and exists
   set_fact:
     _terminal_profile_custom: "{{ terminal_profile_to_edit }}"
   when:
     - terminal_profile_to_edit != ""
     - terminal_profile_to_edit in _terminal_profiles.value
+  become: false
+
+- name: (gnome_other) - If list is empty, and custom profile is not defined, create a profile
+  when:
+    - not _terminal_profiles.value or _terminal_profiles.value | length == 0
+    - terminal_profile_to_edit == ""
+  block:
+    - name: (gnome_other) - Create a random uuid
+      set_fact:
+        _random_uuid: "{{ 9999999999999999999999 | random | to_uuid }}"
+        _terminal_profile_custom: "['{{ _random_uuid }}']"
+    - name: (gnome_other) - Set it in dconf as a new profile
+      dconf:
+        key: /org/gnome/terminal/legacy/profiles:/list
+        value: "['{{ random_uuid }}']"
+  become: false
+
+- name: (gnome_other) - If list is not empty and custom profile is not defined, select the first profile by default
+  vars:
+    _intermediary: "{{ _terminal_profiles.value }}"
+  set_fact:
+    _terminal_profile_custom: "{{ _intermediary[0] }}"
+  when:
+    - terminal_profile_to_edit == ""
+    - _terminal_profile_custom == ""
+    - _terminal_profiles.value
   become: false
 
 - name: (gnome_other) - If a terminal profile was decided, set the dracula theme
