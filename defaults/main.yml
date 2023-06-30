@@ -121,6 +121,9 @@ dconf_options:
     val: ['<Super>4']
   - key: /org/gnome/mutter/dynamic-workspaces
     val: 'true'
+  - key: /org/gnome/shell/extensions/window-list/show-on-all-monitors
+    val: 'true'
+
 
 
 # Set a custom profile here, if you don't want to override the first profile in the dconf list

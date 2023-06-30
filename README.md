@@ -92,9 +92,9 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
 
 - Install GNOME shell extensions
   - Extensions (or Extension manager if available)
-  - Tweaks
-  - GSConnect ? Mostly for fun i guess
   - AppIndicator and KStatusNotifier Support
+  - Tray Icons: Reloaded
+  - GSConnect ? Mostly for fun i guess
 
 - Beautify your libreoffice setup
   - Tabbed setup
