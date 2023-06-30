@@ -14,18 +14,11 @@
     state: present
   become: true
 
-- name: (basics) - Fetch the fedora version to get the correct RPM fusion link
-  command: 'rpm -E %fedora'
-  failed_when: version_cmd.rc != 0
-  changed_when: false
-  register: version_cmd
-  check_mode: no
-
 - name: (basics) - Install RPM fusion stuff
   dnf:
     name:
-      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ version_cmd.stdout }}.noarch.rpm # needed for ffmpeg, etc.
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ version_cmd.stdout }}.noarch.rpm # needed for dropbox, etc.
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm # needed for ffmpeg, etc.
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm # needed for dropbox, etc.
     disable_gpg_check: true
     state: present
   become: true
