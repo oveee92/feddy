@@ -85,6 +85,8 @@ dconf_options:
     val: ['<Super>k']
   - key: /org/gnome/settings-daemon/plugins/media-keys/www # Open web browser
     val: ['<Super>w']
+  - key: /org/gnome/settings-daemon/plugins/media-keys/email
+    val: ['<Super><Shift>m']
   - key: /org/gnome/desktop/interface/clock-show-weekday # Week number
     val: 'true'
   - key: /org/gnome/desktop/calendar/show-weekdate # Week number
@@ -120,6 +122,7 @@ dconf_options:
   - key: /org/gnome/mutter/dynamic-workspaces
     val: 'true'
 
+
 # Set a custom profile here, if you don't want to override the first profile in the dconf list
 terminal_profile_to_edit: ""
 
@@ -135,7 +138,7 @@ gnome_terminal_settings:
   - key: bold-color-same-as-fg
     val: 'false'
   - key: font
-    val: "'Monospace 10'"
+    val: "'Monospace 12'"
   - key: foreground-color
     val: "'#F8F8F2'"
   - key: palette
@@ -144,6 +147,8 @@ gnome_terminal_settings:
     val: 'false'
   - key: use-theme-colors
     val: 'false'
+  - key: scrollback-lines
+    val: '30000'
 
 # The settings that will be added to the keepassxc.ini config file
 keepass_settings:
