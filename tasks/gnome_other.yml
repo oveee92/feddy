@@ -43,11 +43,13 @@
     - name: (gnome_other) - Create a random uuid
       set_fact:
         _random_uuid: "{{ 9999999999999999999999 | random | to_uuid }}"
-        _terminal_profile_custom: "['{{ _random_uuid }}']"
+    - name: (gnome_other) - Set it as the terminal profile to change
+      set_fact:
+        _terminal_profile_custom: "{{ _random_uuid }}"
     - name: (gnome_other) - Set it in dconf as a new profile
       dconf:
         key: /org/gnome/terminal/legacy/profiles:/list
-        value: "['{{ random_uuid }}']"
+        value: "['{{ _random_uuid }}']"
   become: false
 
 - name: (gnome_other) - If list is not empty and custom profile is not defined, select the first profile by default
