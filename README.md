@@ -45,7 +45,7 @@ mkdir roles
 git clone https://github.com/oveee92/feddy.git roles/feddy
 
 # Run the ansible setup
-ansible-playbook install.yml -K
+ansible-playbook install.yml 
 
 # Update and reboot (you might have to re-enter your sudo password at this point, the playbook takes 5+ minutes to run the first time)
 sudo dnf update -y
@@ -81,7 +81,8 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
 
 - Set up your KeepassXC file (maybe from cloud storage?)
 
-- Set up / import your Obsidian vault (maybe from cloud storage).
+- Set up / import your Obsidian vault (maybe from cloud storage). Or start a new one (in that case, run Super-Shift-n first,
+  as Super-n will fail without having created a vault)
 
 - Log into and set up VSCode.
   - Remote explorer

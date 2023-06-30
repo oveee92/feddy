@@ -2,8 +2,15 @@
 
 # Window list at the bottom
 
-- name: (gnome_other) - Activate the window list
+- name: (gnome_other) - List the enabled gnome-extensions
+  command: gnome-extensions list --enabled
+  register: _extensions_list
+  changed_when: false
+  become: false
+
+- name: (gnome_other) - Enable the window list extension when it isn't already enabled
   command: gnome-extensions enable window-list@gnome-shell-extensions.gcampax.github.com
+  when: "'window-list@gnome-shell-extensions.gcampax.github.com' not in _extensions_list.stdout_lines"
   become: false
 
 # Terminal theme stuff
@@ -32,6 +39,7 @@
     - name: (gnome_other) - Set it in dconf as a new profile
       set_fact:
         _terminal_profiles.value: "['{{ 9999999999999999999999 | random | to_uuid }}']"
+  become: false
 
 
 - name: (gnome_other) - Select the first profile by default
