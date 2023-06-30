@@ -7,6 +7,8 @@
   become: false
 
 # Terminal theme stuff
+# TODO: Doesnt work... No profile exists before you manually change
+# it the first time
 
 - name: (gnome_other) - Get the terminal profiles list
   dconf:
@@ -19,6 +21,20 @@
   set_fact:
     _terminal_profile_custom: ""
   become: false
+  
+  # if _terminal_profiles list is empty, do the following:
+  #    generate a UUID ( random | to_uuid | lowercase maybe)
+  #    dconf write /org/gnome/terminal/legacy/profiles:/list "['aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee']"
+  #    set the _terminal_profiles variable to this ^
+
+- name: (gnome_other) - When profiles list is empty, and a custom profile has not been set, create a profile with a random uuid
+  dconf:
+    key: /org/gnome/terminal/legacy/profiles:/list
+    value: "['{{ 9999999999999999999999 | random | to_uuid }}']"
+  when:
+    - _terminal_profiles | length == 0
+    - terminal_profile_to_edit == ""
+
 
 - name: (gnome_other) - Select the first profile by default
   vars:
