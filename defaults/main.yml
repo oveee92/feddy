@@ -4,7 +4,7 @@
 feddy_environment: gnome
 
 # Switch on or off configuration of specific parts
-configure_dropbox: true
+configure_dropbox: false # trying my luck with nextcloud instead
 configure_cloud_mount: true
 configure_xfce_whiskermenu: true # Won't install if the feddy_environment != xfce
 configure_flameshot_qr: true
