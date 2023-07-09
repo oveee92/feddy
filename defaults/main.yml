@@ -22,7 +22,7 @@ install_basic_packages:
   - podman-compose
   - flameshot # snipping tool
   - qalculate-gtk # calculate anything
-  - openvpn # for openvpn stuff
+  # - openvpn # for openvpn stuff # Might not be neccesary for GNOME
   #- openconnect # for cisco anyconnect (not openvpn compatible) # Just install this if needed
   - sshpass # to make ansible work
   - python3-pip
