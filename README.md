@@ -78,9 +78,9 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
 
 ### Others 
 
-- Log into online accounts, mail, etc.
-
 - Set up your KeepassXC file (maybe from cloud storage?)
+
+- Log into online accounts, mail, etc. via the Online Accounts page in Settings
 
 - Set up / import your Obsidian vault (maybe from cloud storage). Or start a new one (in that case, run Super-Shift-n first,
   as Super-n will fail without having created a vault)
@@ -90,17 +90,42 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
   - Git integration
   - others?
 
-- Install GNOME shell extensions
-  - Extensions (or Extension manager if available)
-  - AppIndicator and KStatusNotifier Support
-  - Tray Icons: Reloaded
+- Install GNOME shell extensions, like:
+  - Extension
+  - AppIndicator and KStatusNotifier Support (install it via CLI for better stability)
+    
+      ```bash
+      sudo dnf install gnome-shell-extension-appindicator
+      # then reboot
+      gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
+      ```
+
   - GSConnect ? Mostly for fun i guess
+  - Blur My Shell (for prettifying)
+  - Burn My Windows (for fun)
+  - Caffeine (to prevent screen sleeping)
 
 - Beautify your libreoffice setup
-  - Tabbed setup
-  - better icon sets
+  - View -> User Interface -> Tabbed setup
+  - Settings -> Options -> View -> Icon sets (Sifr Dark)
+  - Maybe create a template with better sized cells for Calc
 
 - Download some ISOs for libvirt or boxes
+
+- Run the following python script to circumvent the GNOME developers latest whim, preventing Flameshot from screenshotting (on wayland):
+
+    ```python
+    import dbus
+    bus = dbus.SessionBus()
+    perm = bus.get_object('org.freedesktop.impl.portal.PermissionStore', '/org/freedesktop/impl/portal/PermissionStore')
+    perm_iface = dbus.Interface(perm, dbus_interface='org.freedesktop.impl.portal.PermissionStore')
+
+    perm_iface.Lookup("screenshot", "screenshot")
+    perm_iface.Set("screenshot", dbus.Boolean(True), "screenshot", {"": ["yes"]}, dbus.Byte(0x00))
+    perm_iface.Lookup("screenshot", "screenshot")
+    ```
+
+- Put your custom wallpapers in `.local/share/backgrounds`
 
 Have fun!
 

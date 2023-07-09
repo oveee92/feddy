@@ -123,6 +123,17 @@ dconf_options:
     val: 'true'
   - key: /org/gnome/shell/extensions/window-list/show-on-all-monitors
     val: 'true'
+  - key: /org/gnome/desktop/interface/show-battery-percentage
+    val: 'true'
+  - key: /org/gnome/GWeather4/temperature-unit
+    val: 'centigrade'
+  - key: /org/gtk/settings/file-chooser/clock-format
+    val: '24h'
+  - key: /org/gnome/shell/extensions/window-list/display-all-workspaces
+    val: 'false'
+
+
+
 
 
 
