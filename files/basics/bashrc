@@ -38,7 +38,83 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# To make calendar stuff work as we like it
+export LC_TIME=nb_NO.utf8
+
+# Colors in python output
+export ANSIBLE_FORCE_COLOR=1
+export PY_COLORS=1
+
+# Set pipelining to false to make things work in molecule
+export ANSIBLE_PIPELINING=false
+
+# Set diff to always for molecule
+export ANSIBLE_DIFF_ALWAYS=true
+
+# disable the default virtualenv prompt change
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Use vim for things like ansible-vault
 export VISUAL=vim
 export EDITOR=vim
 
-export LC_TIME=nb_NO.utf8 # TO make calendar stuff work as we like it
+
+# Prompt
+
+function parse_git_branch() {
+        BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+        if [ ! "${BRANCH}" == "" ]
+        then
+                STAT=`parse_git_dirty`
+                echo "[${BRANCH}${STAT}]"
+        else
+                echo ""
+        fi
+}
+function parse_git_dirty {
+        status=`git status 2>&1 | tee`
+        dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+        untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+        ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+        newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+        renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+        deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+        bits=''
+        if [ "${renamed}" == "0" ]; then
+                bits=">${bits}"
+        fi
+        if [ "${ahead}" == "0" ]; then
+                bits="*${bits}"
+        fi
+        if [ "${newfile}" == "0" ]; then
+                bits="+${bits}"
+        fi
+        if [ "${untracked}" == "0" ]; then
+                bits="?${bits}"
+        fi
+        if [ "${deleted}" == "0" ]; then
+                bits="x${bits}"
+        fi
+        if [ "${dirty}" == "0" ]; then
+                bits="!${bits}"
+        fi
+        if [ ! "${bits}" == "" ]; then
+                echo " ${bits}"
+        else
+                echo ""
+        fi
+}
+function virtualenv_info(){
+    # Get Virtual Env
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        # Strip out the path and just leave the env name
+        venv="${VIRTUAL_ENV##*/}"
+    else
+        # In case you don't have one activated
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "($venv) "
+}
+
+export PS1="\n\[\e[93m\]\`virtualenv_info\`\[\e[0m\]\u\[\e[0m\]\[\e[0;97m\]@\[\e[90m\]\h\[\e[93m\]:\[\e[0m\][\[\e[0;96m\]\w\[\e[0m\]]\[\e[1;94m\]\`parse_git_branch\`\[\e[0m\] "
+

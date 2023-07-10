@@ -57,7 +57,8 @@
       dst: ~/.vimrc
     - src: basics/bashrc
       dst: ~/.bashrc
-    # TODO: tmux
+    - src: basics/tmux.conf
+      dst: ~/.tmux.conf
   become: false
 
 ...
