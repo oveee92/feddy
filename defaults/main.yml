@@ -64,7 +64,7 @@ dconf_options:
   - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click # obvious
     val: 'true'
   - key: /org/gnome/desktop/peripherals/mouse/natural-scroll # Set the scrolling direction how i like it
-    val: 'true'
+    val: 'false'
   - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll # Set the scrolling direction how i like it
     val: 'false'
   - key: /org/gnome/desktop/interface/color-scheme # Dark mode when possible
@@ -97,6 +97,8 @@ dconf_options:
     val: "'areas'"
   - key: /org/gnome/desktop/input-sources/xkb-options # Remap caps lock to escape. Caps lock = both shifts now
     val: ['lv3:ralt_switch', 'caps:escape', 'shift:both_capslock']
+  - key: /org/gnome/desktop/input-sources/sources
+    val: "[('xkb', 'no+nodeadkeys'), ('xkb', 'no'), ('xkb', 'us')]"
   - key: /org/gnome/shell/keybindings/focus-active-notification # Remove default unused shortcut
     val: '@as []' # basically absent
   - key: /org/gnome/desktop/wm/keybindings/toggle-fullscreen # Fullscreen hotkey
@@ -111,6 +113,34 @@ dconf_options:
     val: ['<Shift><Super>3']
   - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-4
     val: ['<Shift><Super>4']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-5
+    val: ['<Shift><Super>5']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-6
+    val: ['<Shift><Super>6']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-7
+    val: ['<Shift><Super>7']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-8
+    val: ['<Shift><Super>8']
+  - key: /org/gnome/desktop/wm/keybindings/move-to-workspace-9
+    val: ['<Shift><Super>9']
+  - key: /org/gnome/shell/keybindings/switch-to-application-1 # Remove hidden priority keymaps
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-2
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-3
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-4
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-5
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-6
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-7
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-8
+    val: '@as []'
+  - key: /org/gnome/shell/keybindings/switch-to-application-9
+    val: '@as []'
   - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-1
     val: ['<Super>1']
   - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-2
@@ -119,6 +149,16 @@ dconf_options:
     val: ['<Super>3']
   - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-4
     val: ['<Super>4']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-5
+    val: ['<Super>5']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-6
+    val: ['<Super>6']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-7
+    val: ['<Super>7']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-8
+    val: ['<Super>8']
+  - key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-9
+    val: ['<Super>9']
   - key: /org/gnome/mutter/dynamic-workspaces
     val: 'true'
   - key: /org/gnome/shell/extensions/window-list/show-on-all-monitors
@@ -126,11 +166,15 @@ dconf_options:
   - key: /org/gnome/desktop/interface/show-battery-percentage
     val: 'true'
   - key: /org/gnome/GWeather4/temperature-unit
-    val: 'centigrade'
+    val: "'centigrade'"
   - key: /org/gtk/settings/file-chooser/clock-format
-    val: '24h'
+    val: "'24h'"
   - key: /org/gnome/shell/extensions/window-list/display-all-workspaces
     val: 'false'
+  - key: /org/gnome/desktop/interface/enable-hot-corners
+    val: 'false'
+    
+
 
 
 

@@ -92,7 +92,7 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
 
 - Install GNOME shell extensions, like:
   - Extension
-  - AppIndicator and KStatusNotifier Support (install it via CLI for better stability)
+  - AppIndicator and KStatusNotifier Support (install it via CLI for better stability):
     
       ```bash
       sudo dnf install gnome-shell-extension-appindicator
@@ -100,7 +100,7 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
       gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com
       ```
 
-  - GSConnect ? Mostly for fun i guess
+  - GSConnect
   - Blur My Shell (for prettifying)
   - Burn My Windows (for fun)
   - Caffeine (to prevent screen sleeping)
@@ -124,7 +124,7 @@ If using the dropbox daemon, after installation and reboot, find the link to reg
     perm_iface.Set("screenshot", dbus.Boolean(True), "screenshot", {"": ["yes"]}, dbus.Byte(0x00))
     perm_iface.Lookup("screenshot", "screenshot")
     ```
-
+    
 - Put your custom wallpapers in `.local/share/backgrounds`
 
 Have fun!

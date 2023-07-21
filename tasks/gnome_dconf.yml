@@ -4,7 +4,7 @@
 - name: Set standard dconf parameters
   dconf:
     key: "{{ item.key }}"
-    value: "{{ item.val | default(omit) }}"
+    value: "{{ item.val | default(omit) | string }}"
     state: "{{ item.state | default('present') }}"
   loop: "{{ dconf_options }}"
   become: false
