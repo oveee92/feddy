@@ -38,9 +38,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# To make calendar stuff work as we like it
-export LC_TIME=nb_NO.utf8
-
 # Colors in python output
 export ANSIBLE_FORCE_COLOR=1
 export PY_COLORS=1
