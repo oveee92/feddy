@@ -14,7 +14,7 @@
 
     - name: (obsidian) - Download Obsidian AppImage
       get_url:
-        url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.3.5/Obsidian-1.3.5.AppImage
+        url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.4.13/Obsidian-1.4.13.AppImage
         dest: /usr/local/bin/obsidian
         mode: '0755'
       become: true
