@@ -55,6 +55,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export VISUAL=vim
 export EDITOR=vim
 
+# Set virsh to connect automatically to local qemu, to avoid needing
+# to specify it for every command
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
 
 # Prompt
 
