@@ -48,7 +48,6 @@
 - name: (basics) - Install basic flatpak packages
   community.general.flatpak:
     name: "{{ install_basic_packages_flatpak }}"
-    method: user
     state: present
 
 - name: (basics) - Install pip modules

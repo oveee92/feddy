@@ -11,8 +11,7 @@
 - name: (flameshot_qr) - Ensure packages are installed
   flatpak:
     name:
-      - flameshot
-    method: user
+      - org.flameshot.Flameshot
 
 - name: (flameshot_qr) - Fix stupid GNOME permissions to make it work with shortcuts
   shell: "flatpak permission-set screenshot screenshot flameshot yes"

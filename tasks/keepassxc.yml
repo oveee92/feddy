@@ -13,7 +13,6 @@
     name:
       - org.keepassxc.KeePassXC
     state: present
-    method: user
 
 - name: (keepassxc) - Configure keepassxc
   ini_file:
