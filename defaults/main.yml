@@ -68,6 +68,8 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
 
 # General dconf options
 dconf_options:
+  - key: /system/locale/region
+    val: "'nb_NO.UTF-8'"
   - key: /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled # obvious
     val: 'true'
   - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click # obvious
