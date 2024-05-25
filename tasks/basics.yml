@@ -45,9 +45,17 @@
     state: present
   become: true
 
+- name: (basics) - Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
 - name: (basics) - Install basic flatpak packages
   community.general.flatpak:
     name: "{{ install_basic_packages_flatpak }}"
+    method: user
     state: present
 
 - name: (basics) - Install pip modules

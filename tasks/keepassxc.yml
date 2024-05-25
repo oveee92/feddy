@@ -12,6 +12,7 @@
   flatpak:
     name:
       - org.keepassxc.KeePassXC
+    method: user
     state: present
 
 - name: (keepassxc) - Configure keepassxc
