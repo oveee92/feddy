@@ -14,12 +14,6 @@
     state: present
   become: true
 
-- name: (basics) - Install basic flatpak packages
-  flatpak:
-    name: "{{ install_basic_packages_flatpak }}"
-    state: present
-  become: true
-
 - name: (basics) - Install RPM fusion stuff
   dnf:
     name:
@@ -52,7 +46,15 @@
     - ansible
     - virtualenv
     - psutil # for gnome / dconf
+    - flatpak
   become: false
+
+- name: (basics) - Install basic flatpak packages
+  community.general.flatpak:
+    name: "{{ install_basic_packages_flatpak }}"
+    #method: user
+    state: present
+  become: true
 
 - name: (basics) - Copy dotfiles over
   copy:
