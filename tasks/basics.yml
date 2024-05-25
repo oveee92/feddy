@@ -46,7 +46,6 @@
     - ansible
     - virtualenv
     - psutil # for gnome / dconf
-    - flatpak
   become: false
 
 - name: (basics) - Install basic flatpak packages
