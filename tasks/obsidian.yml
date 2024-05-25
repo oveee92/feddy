@@ -5,6 +5,7 @@
   flatpak:
     name:
       - md.obsidian.Obsidian
+    method: user
     state: present
 
 ...

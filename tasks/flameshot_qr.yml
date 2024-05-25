@@ -12,7 +12,7 @@
   flatpak:
     name:
       - flameshot
-  become: true
+    method: user
 
 - name: (flameshot_qr) - Fix stupid GNOME permissions to make it work with shortcuts
   shell: "flatpak permission-set screenshot screenshot flameshot yes"
