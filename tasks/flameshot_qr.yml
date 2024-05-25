@@ -5,9 +5,17 @@
 - name: (flameshot_qr) - Ensure packages are installed
   dnf:
     name:
-      - zbar
       - flameshot
   become: true
+
+- name: (flameshot_qr) - Ensure packages are installed
+  flatpak:
+    name:
+      - flameshot
+  become: true
+
+- name: (flameshot_qr) - Fix stupid GNOME permissions to make it work with shortcuts
+  shell: "flatpak permission-set screenshot screenshot flameshot yes"
 
 - name: (flameshot_qr) - Transfer script
   copy:

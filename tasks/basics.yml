@@ -8,9 +8,15 @@
     use: systemd
   become: true
 
-- name: (basics) - Install basic packages
+- name: (basics) - Install basic dnf packages
   dnf:
-    name: "{{ install_basic_packages }}"
+    name: "{{ install_basic_packages_dnf }}"
+    state: present
+  become: true
+
+- name: (basics) - Install basic flatpak packages
+  flatpak:
+    name: "{{ install_basic_packages_flatpak }}"
     state: present
   become: true
 

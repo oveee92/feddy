@@ -11,12 +11,12 @@ configure_flameshot_qr: true
 configure_keepassxc: true
 configure_libvirt_qemu: true
 configure_obsidian: true
-configure_onlyoffice: true
+configure_onlyoffice: false
 configure_vscode: true
 
 # List of packages that should be installed with yum/dnf
-install_basic_packages:
-  - remmina # rdp, vnc, etc.
+install_basic_packages_dnf:
+  #- remmina # rdp, vnc, etc. # Do i really need this?
   - firefox
   - podman
   - podman-compose
@@ -31,6 +31,15 @@ install_basic_packages:
   - ipcalc # IP calculator
   - libreoffice
   - evolution # mail
+
+# List of packages that should be installed with yum/dnf
+install_basic_packages_flatpak:
+  - com.google.Chrome
+  # Artsy stuff
+  - org.godotengine.Godot
+  - org.blender.Blender
+  - org.kde.krita
+  - org.inkscape.Inkscape
 
 # Custom hotkeys
 dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something so that dconf won't die dramatically when I try to quote the variables below
