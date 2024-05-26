@@ -7,7 +7,6 @@
     name: com.visualstudio.code
     method: user
     state: present
-  become: true
 
 - name: (vscode) - Make sure the keyring directory exists, to allow persistent login for vscode
   file:
