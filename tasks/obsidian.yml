@@ -3,8 +3,7 @@
 # This taskset installs Obsidian.md
 - name: (obsidian) - Install the flatpak for Obsidian
   flatpak:
-    name:
-      - md.obsidian.Obsidian
+    name: md.obsidian.Obsidian
     method: user
     state: present
 

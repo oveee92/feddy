@@ -3,28 +3,21 @@
 # Install custom scripts for reading QR codes using flameshot
 
 - name: (flameshot_qr) - Ensure packages are installed
-  dnf:
-    name:
-      - flameshot
-  become: true
-
-- name: (flameshot_qr) - Ensure packages are installed
-  flatpak:
-    name:
-      - org.flameshot.Flameshot
+  flatpak: # Use flatpak since it seems to be better supported
+    name: org.flameshot.Flameshot
     method: user
 
-- name: (flameshot_qr) - Fix stupid GNOME permissions to make it work with shortcuts
-  shell: "flatpak permission-set screenshot screenshot flameshot yes"
+- name: (flameshot_qr) - Fix GNOME permissions to make it work with shortcuts
+  shell: "/usr/bin/flatpak permission-set screenshot screenshot flameshot yes"
 
-- name: (flameshot_qr) - Transfer script
+- name: (flameshot_qr) - Transfer script for reading QR codes
   copy:
     src: flameshot_qr/flameshot_qr_script
     dest: /usr/local/bin/flameshot_qr
     mode: '0755'
   become: true
 
-- name: (flameshot_qr) - Transfer desktop entry (to allow opening it with flameshot)
+- name: (flameshot_qr) - Transfer desktop entry to allow opening it with flameshot
   copy:
     src: flameshot_qr/flameshot-qr.desktop
     dest: /usr/share/applications/flameshot-qr.desktop

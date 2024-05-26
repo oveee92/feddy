@@ -64,10 +64,10 @@
   loop:
     - ansible
     - virtualenv
-    - psutil # for gnome / dconf
+    - psutil # for gnome / dconf stuff
   become: false
 
-- name: (basics) - Copy dotfiles over
+- name: (basics) - Copy my dotfiles over
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"

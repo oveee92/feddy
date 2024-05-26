@@ -2,23 +2,10 @@
 
 # This taskset installs VSCode via a repository
 
-- name: (vscode) - Add Microsoft GPG key
-  rpm_key:
-    key: https://packages.microsoft.com/keys/microsoft.asc
-  become: true
-
-- name: (vscode) - Add VS Code repository
-  yum_repository:
-    name: vscode
-    description: Visual Studio Code
-    baseurl: https://packages.microsoft.com/yumrepos/vscode
-    gpgcheck: yes
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-  become: true
-
 - name: (vscode) - Install VS Code
-  yum:
-    name: code
+  flatpak:
+    name: com.visualstudio.code
+    method: user
     state: present
   become: true
 

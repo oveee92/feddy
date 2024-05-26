@@ -2,16 +2,9 @@
 
 # This taskset installs and configures keepassxc
 
-#- name: (keepassxc) - Install keepassxc
-#  dnf:
-#    name: keepassxc
-#    state: present
-#  become: true
-
 - name: (keepassxc) - Install keepassxc
   flatpak:
-    name:
-      - org.keepassxc.KeePassXC
+    name: org.keepassxc.KeePassXC
     method: user
     state: present
 
