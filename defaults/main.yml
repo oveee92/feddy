@@ -189,9 +189,10 @@ dconf_options:
 # The dconf settings within the chosen terminal profile
 gnome_terminal_settings:
   light:
+    - key: visible-name
+      val: 'Light mode'
     - key: audible-bell
       val: 'false'
-      # Dracula theme
     - key: foreground-color
       val: "'#171421'"
     - key: background-color
@@ -210,6 +211,8 @@ gnome_terminal_settings:
       val: '30000'
 
   dark:
+    - key: visible-name
+      val: 'Dark mode'
     - key: audible-bell
       val: 'false'
       # Dracula theme

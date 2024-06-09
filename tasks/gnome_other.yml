@@ -25,56 +25,48 @@
 - name: (gnome_other) - Create a temporary list to work with
   set_fact:
     _wip_profile_list: "{{ _terminal_profiles.value }}"
+  become: false
 
 - name: Compile a list of the profiles, generating a uuid from the profile name
   set_fact:
     _wip_profile_list: "{{  _wip_profile_list + [item.profile_name | to_uuid] }}"
   when: (item.profile_name | to_uuid) not in _wip_profile_list
   loop: "{{ gnome_terminal_settings | dict2items(key_name='profile_name',value_name='profile_values') }}"
+  become: false
 
 - name: (gnome_other) - Add the new profiles with dconf
   dconf:
     key: /org/gnome/terminal/legacy/profiles:/list
     value: "{{ _wip_profile_list }}"
-
-- debug:
-    var: _wip_profile_list
-
-- fail:
-
-- name: (gnome_other) - Create each profile
-  when:
-    - not _terminal_profiles.value or _terminal_profiles.value | length == 0
-  block:
-    - name: (gnome_other) - Create a random uuid
-      set_fact:
-        _random_uuid: "{{ 9999999999999999999999 | random | to_uuid }}"
-    - name: (gnome_other) - Set it as the terminal profile to change
-      set_fact:
-        _terminal_profile_custom: "{{ _random_uuid }}"
-    - name: (gnome_other) - Set it in dconf as a new profile
-      dconf:
-        key: /org/gnome/terminal/legacy/profiles:/list
-        value: "['{{ _random_uuid }}']"
   become: false
 
+- name: Initialize transformed settings
+  set_fact:
+    transformed_gnome_terminal_settings: []
+  become: false
 
-#- name: (gnome_other) - If list is not empty and custom profile is not defined, select the first profile by default
-#  vars:
-#    _intermediary: "{{ _terminal_profiles.value }}"
-#  set_fact:
-#    _terminal_profile_custom: "{{ _intermediary[0] }}"
-#  when:
-#    - terminal_profile_to_edit == ""
-#    - _terminal_profile_custom == ""
-#    - _terminal_profiles.value
-#  become: false
+- name: Transform settings for each profile
+  set_fact:
+    transformed_gnome_terminal_settings: >-
+      {{
+        transformed_gnome_terminal_settings
+        + gnome_terminal_settings[item.key]
+        | map('combine', {'profile': item.key})
+        | list
+      }}
+  with_dict: "{{ gnome_terminal_settings }}"
+  become: false
 
-- name: (gnome_other) - Loop through each entry
+- name: Debug transformed settings
+  debug:
+    var: transformed_gnome_terminal_settings
+  become: false
+
+- name: (gnome_other) - Loop through each entry, creating stuff as you go
   dconf:
-    key: "/org/gnome/terminal/legacy/profiles:/:{{ _terminal_profile_custom }}/{{ item.key }}" # pay attention to the colons
+    key: "/org/gnome/terminal/legacy/profiles:/:{{ item.profile | to_uuid }}/{{ item.key }}" # pay attention to the colons
     value: "{{ item.val }}"
-  loop: "{{ gnome_terminal_settings }}"
+  loop: "{{ transformed_gnome_terminal_settings }}"
   become: false
 
 - name: (gnome_other) - Set the Solarized dark dircolors, for pretty directory listings
