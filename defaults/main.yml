@@ -190,7 +190,7 @@ dconf_options:
 gnome_terminal_settings:
   light:
     - key: visible-name
-      val: 'Light mode'
+      val: "'Light mode'"
     - key: audible-bell
       val: 'false'
     - key: foreground-color
@@ -212,7 +212,7 @@ gnome_terminal_settings:
 
   dark:
     - key: visible-name
-      val: 'Dark mode'
+      val: "'Dark mode'"
     - key: audible-bell
       val: 'false'
       # Dracula theme
