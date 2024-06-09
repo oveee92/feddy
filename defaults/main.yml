@@ -186,38 +186,51 @@ dconf_options:
     val: 'false'
     
 
-
-
-
-
-
-
-# Set a custom profile here, if you don't want to override the first profile in the dconf list
-terminal_profile_to_edit: ""
-
 # The dconf settings within the chosen terminal profile
 gnome_terminal_settings:
-  - key: audible-bell
-    val: 'false'
-    # Dracula theme
-  - key: background-color
-    val: "'#282A36'"
-  - key: bold-color
-    val: "'#6E46A4'"
-  - key: bold-color-same-as-fg
-    val: 'false'
-  - key: font
-    val: "'Monospace 12'"
-  - key: foreground-color
-    val: "'#F8F8F2'"
-  - key: palette
-    val: ['#262626', '#E356A7', '#42E66C', '#E4F34A', '#9B6BDF', '#E64747', '#75D7EC', '#EFA554', '#7A7A7A', '#FF79C6', '#50FA7B', '#F1FA8C', '#BD93F9', '#FF5555', '#8BE9FD', '#FFB86C']
-  - key: use-system-font
-    val: 'false'
-  - key: use-theme-colors
-    val: 'false'
-  - key: scrollback-lines
-    val: '30000'
+  light:
+    - key: audible-bell
+      val: 'false'
+      # Dracula theme
+    - key: foreground-color
+      val: "'#171421'"
+    - key: background-color
+      val: "'#FCF8EB'"
+    - key: bold-color-same-as-fg
+      val: 'true'
+    - key: font
+      val: "'Monospace 12'"
+    - key: palette
+      val: ['#171421', '#C01C28', '#26A269', '#A2734C', '#12488B', '#A347BA', '#2AA1B3', '#D0CFCC', '#5E5C64', '#F66151', '#33D17A', '#E9AD0C', '#2A7BDE', '#C061CB', '#33C7DE', '#FFFFFF']
+    - key: use-system-font
+      val: 'false'
+    - key: use-theme-colors
+      val: 'false'
+    - key: scrollback-lines
+      val: '30000'
+
+  dark:
+    - key: audible-bell
+      val: 'false'
+      # Dracula theme
+    - key: foreground-color
+      val: "'#F8F8F2'"
+    - key: background-color
+      val: "'#282A36'"
+    - key: bold-color
+      val: "'#6E46A4'"
+    - key: bold-color-same-as-fg
+      val: 'false'
+    - key: font
+      val: "'Monospace 12'"
+    - key: palette
+      val: ['#262626', '#E356A7', '#42E66C', '#E4F34A', '#9B6BDF', '#E64747', '#75D7EC', '#EFA554', '#7A7A7A', '#FF79C6', '#50FA7B', '#F1FA8C', '#BD93F9', '#FF5555', '#8BE9FD', '#FFB86C']
+    - key: use-system-font
+      val: 'false'
+    - key: use-theme-colors
+      val: 'false'
+    - key: scrollback-lines
+      val: '30000'
 
 # The settings that will be added to the keepassxc.ini config file
 keepass_settings:
