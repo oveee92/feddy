@@ -10,10 +10,10 @@
 
 - name: (gnome_terminal_profiles) - Create a temporary list to work with
   set_fact:
-    _wip_profile_list: "{{ _terminal_profiles.value }}"
+    _wip_profile_list: "{{ _terminal_profiles.value | default([], true)  }}" # Defaults to [] if it returns an empty string
   become: false
 
-- name: Compile a list of the profiles, generating a uuid from the profile name
+- name: (gnome_terminal_profiles) - Compile a list of the profiles, generating a uuid from the profile name
   set_fact:
     _wip_profile_list: "{{  _wip_profile_list + [item.profile_name | to_uuid] }}"
   when: (item.profile_name | to_uuid) not in _wip_profile_list
