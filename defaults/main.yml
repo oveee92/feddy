@@ -257,7 +257,7 @@ keepass_settings:
   # GUI
   - section: GUI
     opt: ApplicationTheme
-    val: 'dark'
+    val: 'auto'
   - section: GUI
     opt: MinimizeOnClose
     val: 'true'
@@ -277,15 +277,21 @@ keepass_settings:
   - section: PasswordGenerator
     opt: ExcludedChars
     val: >-
-      /\\\"'^~`'|
+      *|~`^\\<>
   - section: PasswordGenerator
     opt: Length
     val: 16
+  - section: PasswordGenerator
+    opt: LowerCase
+    val: 'true'
   - section: PasswordGenerator
     opt: Logograms
     val: 'true'
   - section: PasswordGenerator
     opt: Dashes
+    val: 'true'
+  - section: PasswordGenerator
+    opt: Math
     val: 'true'
   # Security
   - section: Security
@@ -294,4 +300,4 @@ keepass_settings:
   - section: Security
     opt: PasswordsRepeatVisible
     val: 'false'
-    
+

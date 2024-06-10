@@ -10,7 +10,7 @@
 
 - name: (keepassxc) - Configure keepassxc
   ini_file:
-    path: ~/.config/keepassxc/keepassxc.ini
+    path: ~/.var/app/org.keepassxc.KeePassXC/config/keepassxc/keepassxc.ini
     no_extra_spaces: true
     section: "{{ item.section }}"
     option: "{{ item.opt }}"
