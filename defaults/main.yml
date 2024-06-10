@@ -13,6 +13,7 @@ configure_libvirt_qemu: true
 configure_obsidian: true
 configure_onlyoffice: false
 configure_vscode: true
+configure_gnome_terminal_profiles: true
 
 # List of packages that should be installed with yum/dnf
 install_basic_packages_dnf:

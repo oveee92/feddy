@@ -49,6 +49,11 @@
   when: '"gnome" in feddy_environment'
   tags: [gnome_dconf]
 
+- name: (main) - Import gnome_terminal_profiles.yml
+  import_tasks: gnome_terminal_profiles.yml
+  when: configure_gnome_terminal_profiles
+  tags: [gnome_dconf]
+
 - name: (main) - Import gnome_other.yml
   import_tasks: gnome_other.yml
   when: '"gnome" in feddy_environment'
