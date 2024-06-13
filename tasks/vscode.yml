@@ -1,12 +1,27 @@
 ---
 
 # This taskset installs VSCode via a repository
+# Note: Flatpak version is unofficial, and makes some features difficult to get working due to it being containerized
+
+- name: (vscode) - Add Microsoft GPG key
+  rpm_key:
+    key: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
+
+- name: (vscode) - Add VS Code repository
+  yum_repository:
+    name: vscode
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+  become: true
 
 - name: (vscode) - Install VS Code
-  flatpak:
-    name: com.visualstudio.code
-    method: user
+  yum:
+    name: code
     state: present
+  become: true
 
 - name: (vscode) - Make sure the keyring directory exists, to allow persistent login for vscode
   file:
@@ -15,5 +30,4 @@
   become: false
 
 # Config is fetched automatically from github
-
 ...
