@@ -7,6 +7,11 @@
     name: org.flameshot.Flameshot
     method: user
 
+- name: (flameshot_qr) - Ensure zbarimg is installed
+  package:
+    name: zbar
+    state: present
+
 - name: (flameshot_qr) - Fix GNOME permissions to make it work with shortcuts
   shell: "/usr/bin/flatpak permission-set screenshot screenshot flameshot yes"
 
