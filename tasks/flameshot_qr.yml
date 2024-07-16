@@ -11,6 +11,7 @@
   package:
     name: zbar
     state: present
+  become: true
 
 - name: (flameshot_qr) - Fix GNOME permissions to make it work with shortcuts
   shell: "/usr/bin/flatpak permission-set screenshot screenshot flameshot yes"
