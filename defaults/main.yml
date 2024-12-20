@@ -80,7 +80,7 @@ dconf_options:
   - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll # Set the scrolling direction how i like it
     val: 'false'
   - key: /org/gnome/desktop/interface/color-scheme # Dark mode when possible
-    val: "'prefer-dark'"
+    val: "'prefer-light'"
   - key: /org/gnome/desktop/session/idle-delay # 5 minutes before screen going idle
     val: uint32 600
   - key: /org/gnome/desktop/screensaver/lock-delay # then locking 30 seconds after that
