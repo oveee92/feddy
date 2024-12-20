@@ -23,7 +23,7 @@ Log into the fedora desktop with your user, open the terminal and paste the foll
 
 ```bash
 # Install git and ansible
-sudo dnf install git python3-pip -y
+sudo dnf install git python3-pip python3-libdnf5 -y
 python3 -m pip install ansible --user
 ansible-galaxy collection install community.general
 
@@ -46,7 +46,7 @@ git clone https://github.com/oveee92/feddy.git roles/feddy
 
 # Run the ansible setup
 # If the previous steps take too long and the sudo password cache times out, you'll need to add -K to the next command
-ansible-playbook install.yml
+ansible-playbook install.yml -K
 
 # Update and reboot (you might have to re-enter your sudo password at this point, the playbook takes 5+ minutes to run the first time)
 sudo dnf update -y
