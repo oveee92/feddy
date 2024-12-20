@@ -55,7 +55,7 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
     command: obsidian
     binding: <Shift><Super>n
   - name: Obsidian newnote # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
-    command: 'sh -c "obsidian \\"obsidian://new?&append=true&file=Unsorted/note-$(date +%Y-%m-%d_%H%M)\\""'
+    command: '/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=obsidian.sh --file-forwarding md.obsidian.Obsidian @@u %U @@'
     binding: <Super>n
   - name: Qalculate # More beefy calculator
     command: qalculate-gtk
@@ -64,7 +64,7 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
     command: gnome-terminal
     binding: '<Super>Return'
   - name: KeepassXC
-    command: keepassxc
+    command: '/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc --file-forwarding org.keepassxc.KeePassXC @@ %f @@'
     binding: '<Control><Alt>k'
 
 # General dconf options
