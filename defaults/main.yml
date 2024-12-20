@@ -52,11 +52,8 @@ dconf_custom_hotkeys: # TODO: Try to play with the strings-filter or something s
     binding: <Shift><Super>s
   - name: Obsidian # Open my vault
     #command: obsidian obsidian://advanced-uri?vault=ovenotes
-    command: obsidian
-    binding: <Shift><Super>n
-  - name: Obsidian newnote # Open my vault with a new note, with a timestamp as the title (needed lots of escape chars)
     command: '/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=obsidian.sh --file-forwarding md.obsidian.Obsidian @@u %U @@'
-    binding: <Super>n
+    binding: <Shift><Super>n
   - name: Qalculate # More beefy calculator
     command: qalculate-gtk
     binding: <Shift><Super>k
